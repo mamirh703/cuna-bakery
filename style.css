@@ -57,14 +57,11 @@ hero {
     height: 100vh;
 }
 
-.custom-shape {
-    height: 80vh;
-    width: 180vh;
-    margin: auto;
-    align-items: center;
-    border: black solid 2px;
-    clip-path: polygon(25% 0%,75% 0%,100% 50%,75% 100%,25% 100%,0% 50%);
+.hex {
+    width: 300px;
+    height: 200px;
 }
+
 
 .custom-shape h1 {
     align-items: center;
