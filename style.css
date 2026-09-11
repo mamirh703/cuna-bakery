@@ -10,6 +10,7 @@ html {
 body {
     margin: 0;
     padding: 0 2rem 0 2rem;
+    background-color: beige;
 }
 
 .material-symbols-outlined {
@@ -26,9 +27,16 @@ nav {
     align-items: center;
 }
 
+nav h2 {
+    font-family: chewy;
+    font-size: 30px;
+}
+
 nav a {
     text-decoration: none;
     color: black;
+    font-weight: 500;
+    font-size: 18px;
 }
 
 .directories {
@@ -53,17 +61,56 @@ nav a {
     padding: 5px 10px 3px 12px;
 }
 
-hero {
+.hero {
     height: 100vh;
 }
 
-.hex {
-    width: 300px;
-    height: 200px;
+text {
+    font-family: chewy;
+    font-size: 23px;
 }
 
+p {
+    font-size: 23px;
+    position: absolute;
+    top: 245px;
+    left: 250px;
+    width: 230px;
+}
 
-.custom-shape h1 {
-    align-items: center;
-    text-align: center;
+.order-main {
+    position: absolute;
+    left: 250px;
+    top: 470px;
+    background-color: burlywood;
+    border: black solid 1px;
+    padding: 13px 15px;
+    border-radius: 20px;
+}
+
+.order-main a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+}
+
+.items-carousel {
+    width: 300px;
+    height: 400px;
+    background-color: antiquewhite;
+    position: absolute;
+    left: 41%;
+    top: 35%;
+}
+
+.ic-cont {
+    height: 400px;
+}
+
+.ic-cont img {
+    width: 100%;
+}
+
+.subhero {
+    height: 100vh;
 }
