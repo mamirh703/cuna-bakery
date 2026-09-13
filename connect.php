@@ -2,7 +2,7 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $database = "cuna";
+    $database = "cunadb";
 
     $conn = new mysqli($servername, $username, $password, $database);
 

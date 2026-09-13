@@ -3,15 +3,15 @@
     
     $message = "";
 
-    if ($_SERVER["REQUEST_METHOD"] == POST) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username = trim($_POST["username"]);
         $password = $_POST["password"];
-        $confirmPassword = $_POST["confirmPassword"]
-        $address = trim($_POST["address"])
-        $phone = trim($_POST["phone"])
+        $confirmPassword = $_POST["confirmPassword"];
+        $address = trim($_POST["address"]);
+        $phone = trim($_POST["phone"]);
 
         // Check if field are empty
-        if (empty($username) || empty($passwword) || empty($confirmPassword)){
+        if (empty($username) || empty($password) || empty($confirmPassword)){
             $message = "Please fill in all fields.";
         }
         // Check password confirmation
@@ -20,7 +20,7 @@
         }
         else {
             // Check if username already exist
-            $sql = "SELECT id FROM users WHERE username = ?";
+            $sql = "SELECT userId FROM users WHERE username = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("s", $username);
             $stmt->execute();
@@ -36,14 +36,14 @@
                 // Insert user
                 $sql = "INSERT INTO users (username, password, address, phone, role)
                         VALUES (?, ?, ?, ?, 'user')";
-                $stmt = $conn->prepare($sql)
+                $stmt = $conn->prepare($sql);
                 $stmt->bind_param("ssss", $username, $hashedPassword, $address, $phone);
                 
                 if ($stmt->execute()){
-                    $message = "Registration successful.";
+                    echo"Registeration successful. You can now login";
                 }
                 else {
-                    $message = "Registration failed.";
+                    echo "Registeration failed.";
                 }
             }
             $stmt->close();

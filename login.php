@@ -11,7 +11,7 @@
 
         <h2>Selamat Datang ke Cuna's Bakery</h2>
 
-        <form action="loginact.php" method="POST">
+        <form action="loginAct.php" method="POST">
 
             <div class="form-group">
                 <label>Username</label>
@@ -26,7 +26,10 @@
             <input type="submit" name="submit" value="Login" class="login-btn">
 
         </form>
-
+        <p>
+            Don't have an account?
+            <a href="register.php">Register here</a>
+        </p>
     </div>
 
 </body>
