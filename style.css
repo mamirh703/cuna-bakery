@@ -114,3 +114,22 @@ p {
 .subhero {
     height: 100vh;
 }
+
+.index-item-row {
+    position: absolute;
+    display: grid;
+    
+}
+
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
+}
+
+.brand-footer {
+    font-family: chewy;
+    font-size: 23px;
+}
