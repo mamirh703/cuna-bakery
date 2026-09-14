@@ -19,6 +19,7 @@
             // Check hashed password
             if (password_verify($password, $row['password'])) {
                 $_SESSION['loggedin'] = true;
+                $_SESSION['userID'] = $row['userID'];
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['role'] = $row['role'];
 

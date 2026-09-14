@@ -35,7 +35,7 @@
                 
                 // Insert user
                 $sql = "INSERT INTO users (username, password, address, phone, role)
-                        VALUES (?, ?, ?, ?, 'user')";
+                        VALUES (?, ?, ?, ?, 'member')";
                 $stmt = $conn->prepare($sql);
                 $stmt->bind_param("ssss", $username, $hashedPassword, $address, $phone);
                 

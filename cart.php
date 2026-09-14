@@ -1,27 +1,53 @@
 <?php
-session_start();
-include 'connect.php';
+    session_start();
+    include 'connect.php';
 
-// Initialize cart if it doesn't exist
-if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = [];
-}
-
-// Handle adding items to the cart
-if (isset($_POST['add_to_cart'])) {
-
-    $product_id = $_POST['productID'];
-
-    // If product is already in cart, increase quantity
-    if (isset($_SESSION['cart'][$product_id])) {
-        $_SESSION['cart'][$product_id]++;
-    } else {
-        $_SESSION['cart'][$product_id] = 1;
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
+        header("Location: login.php");
+        exit();
     }
+    if (!isset($_SESSION['role']) || $_SESSION['role'] != 'member') {
+        header("Location: login.php");
+        exit();
+    }
+    if (!isset($_SESSION['userID'])) {
+        header("Location: login.php");
+        exit();
+    }
+    $userID = $_SESSION['userID'];
 
-    header("Location: cart.php");
-    exit();
-}
+    // Handle adding items to the cart
+    if (isset($_POST['add_to_cart'])) {
+
+        $productID = $_POST['productID'];
+
+        // If product is already in cart, increase quantity
+        $stmt = $conn->prepare("SELECT quantity 
+                                FROM cart 
+                                WHERE userID = ? AND productID = ?");
+        $stmt->bind_param("ii", $userID, $productID);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $stmt = $conn->prepare("UPDATE cart 
+                                    SET quantity = quantity + 1 
+                                    WHERE userID = ? AND productID = ?");
+            $stmt->bind_param("ii", $userID, $productID);
+            $stmt->execute();
+        }
+        else {
+            // Product quantity doesn't exist
+            $quantity = 1;
+
+            $stmt = $conn->prepare("INSERT INTO cart (userID, productID, quantity)
+                                   VALUES (?, ?, ?)");
+            $stmt->bind_param("iii", $userID, $productID, $quantity);
+            $stmt->execute();
+        }
+        header("Location: cart.php");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -34,47 +60,39 @@ if (isset($_POST['add_to_cart'])) {
 
     <h2>Your Cart</h2>
 
-    <a href="index.php">Continue Shopping</a>
-
     <?php
-    if (empty($_SESSION['cart'])) {
-        echo "<p>Your cart is empty.</p>";
-    } else {
+        $stmt = $conn->prepare("SELECT cart.productID, cart.quantity, products.name, products.price 
+                                FROM cart
+                                INNER JOIN products
+                                    ON cart.productID = products.productID
+                                WHERE cart.userID = ?");
+        $stmt->bind_param("i", $userID);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
 
         $total = 0;
 
-        foreach ($_SESSION['cart'] as $id => $quantity) {
+        while ($product  = $result->fetch_assoc()) {
+            $subtotal = $product['price'] * $product['quantity'];
 
-            // Prepared statement
-            $stmt = $conn->prepare(
-                "SELECT * FROM products WHERE productID = ?"
-            );
+            $total += $subtotal;
 
-            $stmt->bind_param("i", $id);
-            $stmt->execute();
+            echo "<div>";
 
-            $result = $stmt->get_result();
-            $product = $result->fetch_assoc();
+            echo "<p>";
+            echo htmlspecialchars($product['name']);
+            echo " - Qty: " . $product['quantity'];
+            echo " - RM " . number_format($subtotal, 2);
+            echo "</p>";
 
-            if ($product) {
-
-                $subtotal = $product['price'] * $quantity;
-                $total += $subtotal;
-
-                echo "<div>";
-                echo "<p>";
-                echo htmlspecialchars($product['name']);
-                echo " - Qty: " . $quantity;
-                echo " - RM " . number_format($subtotal, 2);
-                echo "</p>";
-                echo "</div>";
-            }
+            echo "</div>";
         }
-
         echo "<h3>Total: RM " . number_format($total, 2) . "</h3>";
+        
+        echo '<a href="index.php">Continue Shopping</a><br><br>';
 
         echo '<button type="button">Proceed to Checkout</button>';
-    }
     ?>
 
 </body>

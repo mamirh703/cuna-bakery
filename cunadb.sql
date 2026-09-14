@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 13, 2026 at 09:34 AM
+-- Generation Time: Sep 14, 2026 at 07:31 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,13 +24,36 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `cartID` int(11) NOT NULL,
+  `userID` int(11) NOT NULL,
+  `productID` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cartID`, `userID`, `productID`, `quantity`) VALUES
+(1, 3, 1, 2),
+(2, 3, 2, 1),
+(3, 3, 3, 1),
+(7, 2, 1, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orderdetails`
 --
 
 CREATE TABLE `orderdetails` (
   `order_detailID` varchar(10) NOT NULL,
   `orderID` varchar(10) NOT NULL,
-  `productID` varchar(10) NOT NULL,
+  `productID` int(11) DEFAULT NULL,
   `quantity` int(11) NOT NULL,
   `subtotal` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -73,13 +96,21 @@ CREATE TABLE `payments` (
 --
 
 CREATE TABLE `products` (
-  `productID` varchar(10) NOT NULL,
+  `productID` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `description` text DEFAULT NULL,
   `price` decimal(10,2) NOT NULL,
-  `stock_quantity` int(11) NOT NULL,
-  `status` varchar(20) NOT NULL
+  `image` varchar(555) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`productID`, `name`, `description`, `price`, `image`) VALUES
+(1, 'Makanan 1', 'Makanan 1 sangat manis', 6.00, ''),
+(2, 'Makanan 2', 'Makanan 2 sangat masam', 7.00, ''),
+(3, 'Makanan 3', 'Makanan 3 sangat pahit', 5.00, '');
 
 -- --------------------------------------------------------
 
@@ -102,11 +133,20 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`userID`, `username`, `password`, `address`, `phone`, `role`) VALUES
 (1, 'Admin', '$2y$10$I/0eX.1xZt4tRtr2mUF.MuvskI9UNZU92myUrDUIBgRmG9txxIoXa', '123, Anywhere, Fake Street', '0123456789', 'admin'),
-(2, 'Daniel', '$2y$10$RFmQornS86gIOflSMra9/eT6RR8Axfp6u0vh0zXCa3WA2V/dUaoQ2', '246, Fake Street, Anywhere', '0544288796', 'user');
+(2, 'Daniel', '$2y$10$RFmQornS86gIOflSMra9/eT6RR8Axfp6u0vh0zXCa3WA2V/dUaoQ2', '246, Fake Street, Anywhere', '0544288796', 'member'),
+(3, 'Amir', '$2y$10$fMgWgg0kiCFbROzNsUIHMeI1P8IcBQ8A2LHLeu6jEC2RYxloQ3Zw6', '23, Kunci Air,Fake', '0122564875', 'member');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cartID`),
+  ADD UNIQUE KEY `userID` (`userID`,`productID`),
+  ADD KEY `productID` (`productID`);
 
 --
 -- Indexes for table `orderdetails`
@@ -148,14 +188,33 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `cartID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`),
+  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`);
 
 --
 -- Constraints for table `orderdetails`
