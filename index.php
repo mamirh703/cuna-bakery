@@ -1,3 +1,10 @@
+<?php
+    include "connect.php";
+    session_start();
+
+    $result = $conn->query("SELECT * FROM products");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,12 +79,22 @@
                     POPULAR ITEMS
                 </text>
             </svg>
-            <div class="index-item-row">
-                <div class="index-item">
-                    <h2></h2>
+                <div class="index-item-row">
+                    <?php while ($row = $result->fetch_assoc()) { ?>
+                                <div class="index-item">
+                                    <h3><?php echo htmlspecialchars ($row['name'])?></h3>
+                                    <p><?php echo htmlspecialchars ($row['description'])?></p>
+                                    <p>RM <?php echo htmlspecialchars ($row['price'])?></p>
+
+                                    <form action = "cart.php" method="POST">
+                                        <input type="hidden" name="productID" value="<?php echo htmlspecialchars ($row['productID']);?>">
+                                        <button type="submit" name="add_to_cart">Add to Cart</button>
+                                    </form>
+                                </div>
+                        <?php } ?>
                 </div>
             </div>
-        </div>
+
         <footer>
             <div class="brand-footer">
                 <h1>CUNA'S BAKERY</h1>

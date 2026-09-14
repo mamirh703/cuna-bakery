@@ -11,7 +11,7 @@
 
         <h2>Selamat Datang ke Cuna's Bakery</h2>
 
-        <form action="loginact.php" method="POST">
+        <form action="loginAct.php" method="POST">
 
             <div class="form-group">
                 <label>Username</label>
