@@ -82,10 +82,11 @@
                 <div class="index-item-row">
                     <?php while ($row = $result->fetch_assoc()) { ?>
                                 <div class="index-item">
-                                    <h3><?php echo htmlspecialchars ($row['name'])?></h3>
-                                    <p><?php echo htmlspecialchars ($row['description'])?></p>
-                                    <p>RM <?php echo htmlspecialchars ($row['price'])?></p>
-
+                                    <div class="index-item-details">
+                                        <h3><?php echo htmlspecialchars ($row['name'])?></h3>
+                                        <p><?php echo htmlspecialchars ($row['description'])?></p>
+                                        <p>RM <?php echo htmlspecialchars ($row['price'])?></p>
+                                    </div>
                                     <form action = "cart.php" method="POST">
                                         <input type="hidden" name="productID" value="<?php echo htmlspecialchars ($row['productID']);?>">
                                         <button type="submit" name="add_to_cart">Add to Cart</button>
@@ -102,6 +103,8 @@
             <div class="footer-kanan">
                 <h2>"SWEET AROMA COMES FROM HOMES"</h2>
                 <span>cunasbakery</span>
+                <span>cunasbakery</span>
+                <span>012-3456789</span>
             </div>
         </footer>
     </main>
