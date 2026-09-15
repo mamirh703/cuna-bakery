@@ -10,7 +10,7 @@ html {
 body {
     margin: 0;
     padding: 0 2rem 0 2rem;
-    background-color: beige;
+    background-color: #F4EBE7;
 }
 
 .material-symbols-outlined {
@@ -34,7 +34,7 @@ nav h2 {
 
 nav a {
     text-decoration: none;
-    color: black;
+    color: #331813;
     font-weight: 500;
     font-size: 18px;
 }
@@ -63,6 +63,10 @@ nav a {
 
 .hero {
     height: 100vh;
+}
+
+svg {
+    box-shadow: white;
 }
 
 text {
@@ -121,7 +125,7 @@ text {
     inset: 0;
     margin: 0 5rem 0 5rem;
     display: grid;
-    grid-template-columns: repeat(3,400px);
+    grid-template-columns: repeat(3,370px);
     gap: 50px;
     align-items: center;
     justify-content: center;
@@ -131,8 +135,18 @@ text {
 .index-item {
     justify-items: center;
     align-items: center;
-    background-color: aliceblue;
-    padding: 2rem;
+    background-color: #FFF7EA;
+    padding: 2rem 1rem;
+    margin-top: 3rem;
+}
+
+.index-item-pic {
+    height: 200px;
+}
+
+.index-item-pic img {
+    width: 100%;
+    height: 100%;
 }
 
 .index-item-details {
@@ -146,7 +160,6 @@ text {
     justify-content:center;
     align-items: center;
 }
-
 
 [popover] {
     position:fixed;

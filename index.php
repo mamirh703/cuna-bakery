@@ -46,10 +46,7 @@
             <svg viewbox="-67 -30 450 165">
                 <polygon
                     points="-40,-20 -50,50 -40,125 360,125 370,50 360,-20"
-                    fill="none"
-                    stroke="black"
-                    stroke-width="1"
-                    stroke-linejoin="round"
+                    fill="white"
                 />
                 <text x="90" y="5">
                     CUNA'S BAKERY
@@ -73,18 +70,18 @@
             <svg viewbox="-67 -30 450 215">
                 <polygon
                     points="160,-15 -50,-5 -50,170 160,180 370,170 370,-5"
-                    fill="none"
-                    stroke="black"
-                    stroke-width="1"
+                    fill="white"
                 />
                 <text x="90" y="15">
                     POPULAR ITEMS
                 </text>
             </svg>
             <div class="index-item-col">
-                <?php
-                while ($row = $result->fetch_assoc()) { ?>
+                <?php while ($row = $result->fetch_assoc()) { ?>
                             <div class="index-item">
+                                <div class="index-item-pic">
+                                    <img src="uploads/u good.jpg">
+                                </div>
                                 <div class="index-item-details">
                                     <h3><?php echo htmlspecialchars ($row['name'])?></h3>
                                     <p><?php echo htmlspecialchars ($row['description'])?></p>
