@@ -16,7 +16,7 @@ body {
 .material-symbols-outlined {
     font-variation-settings:
     'FILL' 0,
-    'wght' 400,
+    'wght' 300,
     'GRAD' 0,
     'opsz' 24
 }
@@ -70,7 +70,7 @@ text {
     font-size: 23px;
 }
 
-p {
+.hero p {
     font-size: 23px;
     position: absolute;
     top: 245px;
@@ -112,18 +112,57 @@ p {
 }
 
 .subhero {
+    position: relative;
     height: 100vh;
 }
 
-.index-item-row {
+.index-item-col {
     position: absolute;
+    inset: 0;
+    margin: 0 5rem 0 5rem;
     display: grid;
-    grid-template-rows: minmax(3,1fr);
+    grid-template-columns: repeat(3,400px);
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.index-item {
+    justify-items: center;
+    align-items: center;
+    background-color: aliceblue;
+    padding: 2rem;
 }
 
 .index-item-details {
-    align-items: center;
     justify-items: center;
+    align-items: center;
+}
+
+.index-item-button {
+    display: flex;
+    gap: 20px;
+    justify-content:center;
+    align-items: center;
+}
+
+
+[popover] {
+    position:fixed;
+    inset:0;
+    margin:auto;
+    width:min(320px, 90vw);
+    border:none;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 20px 50px rgba(0,0,0,.2);
+    transition: all 0.3s ease;
+}
+
+[popover]::backdrop {
+    background: rgba(0,0,0,.08);
+    backdrop-filter: blur(2px);
 }
 
 footer {
@@ -139,10 +178,12 @@ footer {
     font-size: 23px;
 }
 
-.footer-kanan h2{
-    font-size: 30px;
+.footer-kanan-span {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
 }
 
-.footer-kanan span {
-    font-size: 20px;
+.footer-kanan h2{
+    font-size: 30px;
 }

@@ -2,7 +2,9 @@
     include "connect.php";
     session_start();
 
-    $result = $conn->query("SELECT * FROM products");
+    $result = $conn->query("SELECT * FROM products ORDER BY productID");
+    $classes=['c1','c2','c3'];
+    $i=0;
 ?>
 
 <!DOCTYPE html>
@@ -20,10 +22,10 @@
 <body>
     <main>
         <nav>
-            <a href="index.html"><h2>CUNA'S BAKERY</h2></a>
+            <a href="index.php"><h2>CUNA'S BAKERY</h2></a>
             <div class="directories">
                 <span>
-                <a href="index.html">HOME</a>
+                <a href="index.php">HOME</a>
                 </span>
                 <span>
                     <a href="#">ITEMS</a>
@@ -79,32 +81,37 @@
                     POPULAR ITEMS
                 </text>
             </svg>
-                <div class="index-item-row">
-                    <?php while ($row = $result->fetch_assoc()) { ?>
-                                <div class="index-item">
-                                    <div class="index-item-details">
-                                        <h3><?php echo htmlspecialchars ($row['name'])?></h3>
-                                        <p><?php echo htmlspecialchars ($row['description'])?></p>
-                                        <p>RM <?php echo htmlspecialchars ($row['price'])?></p>
-                                    </div>
-                                    <form action = "cart.php" method="POST">
-                                        <input type="hidden" name="productID" value="<?php echo htmlspecialchars ($row['productID']);?>">
-                                        <button type="submit" name="add_to_cart">Add to Cart</button>
-                                    </form>
+            <div class="index-item-col">
+                <?php
+                while ($row = $result->fetch_assoc()) { ?>
+                            <div class="index-item">
+                                <div class="index-item-details">
+                                    <h3><?php echo htmlspecialchars ($row['name'])?></h3>
+                                    <p><?php echo htmlspecialchars ($row['description'])?></p>
+                                    <p>RM <?php echo htmlspecialchars ($row['price'])?></p>
                                 </div>
-                        <?php } ?>
-                </div>
+                                <div class="index-item-button">
+                                    <button class="item-details <?= $classes[$i]?>" popovertarget="pd <?= $classes[$i]?>">DETAILS</button>
+                                    <dialog id="pd <?= $classes[$i]?>" popover>
+                                        <p><?= htmlspecialchars($row['description']) ?></p>
+                                    </dialog>
+                                    <a href='cart.php?table=products&id=".$row["ID"]."'><button><span class="material-symbols-outlined">shopping_cart</span></button></a>
+                                </div>
+                            </div>
+                <?php $i++;} ?>
             </div>
-
+        </div>
         <footer>
             <div class="brand-footer">
                 <h1>CUNA'S BAKERY</h1>
             </div>
             <div class="footer-kanan">
                 <h2>"SWEET AROMA COMES FROM HOMES"</h2>
-                <span>cunasbakery</span>
-                <span>cunasbakery</span>
-                <span>012-3456789</span>
+                <div class="footer-kanan-span">
+                    <span>cunasbakery</span>
+                    <span>cunasbakery</span>
+                    <span>012-3456789</span>
+                </div>
             </div>
         </footer>
     </main>
