@@ -31,8 +31,8 @@ $i = 0;
             <li><a href="#">ITEMS</a></li>
         </ul>
         <div class="btns">
-            <a href="" class="order-now-btn">ORDER NOW</a>
-            <a href="" class="cart-btn"><span class="material-symbols-outlined">shopping_cart</span></a>
+            <a href="product.php" class="order-now-btn">ORDER NOW</a>
+            <a href="cart.php" class="cart-btn"><span class="material-symbols-outlined">shopping_cart</span></a>
         </div>
     </nav>
     <!-- Main Content -->
@@ -79,7 +79,12 @@ $i = 0;
                                 <dialog id="pd <?= $classes[$i] ?>" popover>
                                     <p><?= htmlspecialchars($row['description']) ?></p>
                                 </dialog>
-                                <button><a href='cart.php?table=products&id=".$row["ID"]."'><span class="material-symbols-outlined">shopping_cart</span></a></button>
+                                <form method="POST" action="cart.php" style="display:inline;">
+                                    <input type="hidden" name="productID" value="<?= $row['productID'] ?>">
+                                    <button type="submit" name="add_to_cart">
+                                    <span class="material-symbols-outlined">shopping_cart</span>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     <?php $i++;
@@ -99,7 +104,7 @@ $i = 0;
             <div class="footer-kanan-span">
                 <span><i class="fab fa-facebook-f"></i> cunasbakery </span>
                 <span><i class="far fa-envelope"></i> cunasbakery</span>
-                <span> <i class="fab fa-whatsapp"></i> 012-3456789</span>
+                <span><i class="fab fa-whatsapp"></i> 012-3456789</span>
             </div>
         </div>
     </footer>
