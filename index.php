@@ -2,7 +2,7 @@
 include "connect.php";
 session_start();
 
-$result = $conn->query("SELECT * FROM products ORDER BY productID");
+$result = $conn->query("SELECT * FROM products ORDER BY productID LIMIT 3");
 $classes = ['c1', 'c2', 'c3'];
 $i = 0;
 ?>
