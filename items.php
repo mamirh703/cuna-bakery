@@ -56,7 +56,7 @@ $i = 0; */
                     <p>RM <?php echo htmlspecialchars($row['price']) ?></p>
                 </div>
                 <div class="item-card-button">
-                    <button class="item-details<?= $row['productID'] ?>" popovertarget="pd <?= $row['productID'] ?>">DETAILS</button>
+                    <button class="item-details <?= $row['productID'] ?>" popovertarget="pd <?= $row['productID'] ?>">DETAILS</button>
                     <dialog id="pd <?= $row['productID'] ?>" popover>
                         <img src="uploads/u good.jpg">
                         <p><?= htmlspecialchars($row['description']) ?></p>
