@@ -27,8 +27,8 @@ $i = 0;
     <nav>
         <div class="logo"><a href="#">CUNA'S BAKERY</a></div>
         <ul class="links">
-            <li><a href="#">HOME</a></li>
-            <li><a href="#">ITEMS</a></li>
+            <li><a href="index.php">HOME</a></li>
+            <li><a href="items.php">ITEMS</a></li>
         </ul>
         <div class="btns">
             <a href="product.php" class="order-now-btn">ORDER NOW</a>
@@ -77,11 +77,12 @@ $i = 0;
                             <div class="item-card-button">
                                 <button class="item-details <?= $classes[$i] ?>" popovertarget="pd <?= $classes[$i] ?>">DETAILS</button>
                                 <dialog id="pd <?= $classes[$i] ?>" popover>
+                                    <img src="uploads/u good.jpg">
                                     <p><?= htmlspecialchars($row['description']) ?></p>
                                 </dialog>
                                 <form method="POST" action="cart.php" style="display:inline;">
                                     <input type="hidden" name="productID" value="<?= $row['productID'] ?>">
-                                    <button type="submit" name="add_to_cart">
+                                    <button  class="item-cart" type="submit" name="add_to_cart">
                                     <span class="material-symbols-outlined">shopping_cart</span>
                                     </button>
                                 </form>

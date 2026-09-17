@@ -190,7 +190,13 @@ a {
     font-size: 1rem;
     font-weight: 500;
     color: black;
-    padding-top: 1rem;
+    padding-top: 3rem;
+    transition: color 0.2s ease;
+}
+
+.shape2 h6 :hover {
+    color: blue;
+    text-decoration: underline;
 }
 
 /* Grid box for popular item */
@@ -223,13 +229,42 @@ a {
 .item-card-details {
     justify-items: center;
     align-items: center;
+    line-height: 30px;
+    padding: 1rem;
 }
 
 .item-card-button {
     display: flex;
-    gap: 20px;
     justify-content: center;
     align-items: center;
+    padding: 1rem 2rem;
+    gap: 2px;
+}
+
+.item-details {
+    height: 35px;
+    padding: 0 10px;
+    border: black solid 1px;
+    background-color: yellow;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.item-details:hover {
+    background-color: rgb(255, 255, 128);
+}
+
+.item-cart {
+    height: 35px;
+    padding: 0 10px;
+    border: black solid 1px;
+    background-color: orange;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.item-cart:hover {
+    background-color: rgb(255, 192, 74);
 }
 
 /* Popover details */
@@ -280,4 +315,5 @@ footer {
     justify-content: space-between;
     font-size: 1.2rem;
     font-weight: 500;
+    padding-top: 20px;
 }
