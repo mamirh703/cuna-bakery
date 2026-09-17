@@ -71,7 +71,7 @@ $total = 0;
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&imgon_names=shopping_cart" />
-    <link rel="stylesheet" href="style.css"> <!-- For Navigation Bar -->
+    <link rel="stylesheet" href="style.css">
     <style>
         /* Main Content */
         h1 {
@@ -82,7 +82,7 @@ $total = 0;
             font-weight: 700;
             letter-spacing: 3px;
         }
-
+        /* Edit Button */
         .edit-btns {
             text-align: end;
             margin-right: 8%;
@@ -108,7 +108,7 @@ $total = 0;
             padding: 1rem 2rem;
             align-items: center;
         }
-
+        /* If Cart Empty */
         .cart-empty {
             text-align: center;
             color: orangered;
@@ -120,7 +120,18 @@ $total = 0;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin: 1rem;
+            text-align: center;
+            margin: 1%;
+        }
+        /* combine radio button, img and name */
+        .first-childe {
+            display: flex;
+            align-items: center;
+            gap: clamp(0rem, 1rem, 2rem);
+        }
+
+        .cart-items img {
+            height: 80px;
         }
 
         .cart-items p {
@@ -133,7 +144,7 @@ $total = 0;
             margin: 1rem;
             margin-bottom: unset;
         }
-
+        /* Continue and Checkout Button */
         .down-btns {
             display: flex;
             align-items: center;
@@ -143,7 +154,7 @@ $total = 0;
 
         .cont-btn {
             font-size: 1.2rem;
-            cursor: pointer;
+            cursor: pointer;    
 
             transition: color 0.3 ease;
         }
@@ -164,6 +175,15 @@ $total = 0;
 
         .checkout-btn:hover {
             transform: scale(1.05);
+        }
+        /* Mobile responsive */
+        @media (max-width: 480px) {
+            .cart-items img {
+                height: 50px;
+            }
+            .cart-items p {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -195,7 +215,7 @@ $total = 0;
             <!-- Cart -->
             <div class="cart-container">
                 <?php
-                /* Check Cart */
+                /* Check cart item */
                 if (mysqli_num_rows($result) > 0) {
                     while ($product  = $result->fetch_assoc()) {
                         $subtotal = $product['price'] * $product['quantity'];
@@ -203,8 +223,11 @@ $total = 0;
                         $total += $subtotal; ?>
                         <!-- Cart Items -->
                         <div class="cart-items">
-                            <input type="radio" name="productID" value="<?= $product['productID'] ?>">
-                            <p><?= htmlspecialchars($product['name']); ?></p>
+                            <div class="first-childe">
+                                <input type="radio" name="productID" value="<?= $product['productID'] ?>">
+                                <img src="uploads/u good.jpg">
+                                <p><?= htmlspecialchars($product['name']); ?></p>
+                            </div>
                             <p>QTY: x<?= $product['quantity']; ?> </p>
                             <p>RM <?= number_format($subtotal, 2); ?> </p>
                         </div>
