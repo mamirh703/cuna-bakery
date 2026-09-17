@@ -3,8 +3,6 @@ include "connect.php";
 session_start();
 
 $result = $conn->query("SELECT * FROM products ORDER BY productID");
-$classes = ['c1', 'c2', 'c3', 'c4'];
-$i = 0;
 ?>
 
 <!DOCTYPE html>
@@ -108,10 +106,53 @@ $i = 0;
 
         /* Main Content */
 
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 1rem 5%;
+            justify-content: space-between;
+        }
+
+        /* Header */
+
+        .header h1 {
+            font-family: chewy;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+
+        /* Search bar */
+
+        .searchBar {
+            position: relative;
+            display: inline-block;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            pointer-events: none;
+        }
+
+        .search-input {
+            padding-left: 40px;
+            padding-right: 15px;
+            width: 500px;
+            height: 40px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        /* Product items */
+
         .item-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, 370px);
-            margin-top: 3rem;
             gap: 3rem;
             align-items: center;
             justify-content: center;
@@ -207,13 +248,20 @@ $i = 0;
             <li><a href="index.php">HOME</a></li>
             <li><a href="products.php">ITEMS</a></li>
         </ul>
-            <div class="btns">
-                <a href="products.php" class="order-now-btn">ORDER NOW</a>
+        <div class="btns">
+            <a href="products.php" class="order-now-btn">ORDER NOW</a>
             <a href="cart.php" class="cart-btn"><span class="material-symbols-outlined">shopping_cart</span></a>
         </div>
     </nav>
     <!-- Main Content -->
     <main>
+        <div class="header">
+            <h1>ITEMS</h1>
+            <div class="searchBar">
+                <i class="fa fa-search search-icon"></i>
+                <input type="search" id="searchBar" placeholder="Search" oninput="filterList()" class="search-input">
+            </div>
+        </div>
         <div class="item-grid">
             <?php while ($row = $result->fetch_assoc()) { ?>
                 <div class="item-card">
@@ -226,20 +274,19 @@ $i = 0;
                         <p>RM <?php echo htmlspecialchars($row['price']) ?></p>
                     </div>
                     <div class="item-card-button">
-                        <button class="item-details <?= $classes[$i] ?>" popovertarget="pd <?= $classes[$i] ?>">DETAILS</button>
-                        <dialog id="pd <?= $classes[$i] ?>" popover>
+                        <button class="item-details <?= $row['productID'] ?>" popovertarget="pd<?= $row['productID'] ?>">DETAILS</button>
+                        <dialog id="pd<?= $row['productID'] ?>" popover>
                             <p><?= htmlspecialchars($row['description']) ?></p>
                         </dialog>
                         <form method="POST" action="cart.php" style="display:inline;">
-                            <input type="hidden" name="productID" value="<?= (int)$row['productID'] ?>">
+                            <input type="hidden" name="productID" value="<?= $row['productID'] ?>">
                             <button type="submit" name="add_to_cart">
                                 <span class="material-symbols-outlined">shopping_cart</span>
                             </button>
                         </form>
                     </div>
                 </div>
-            <?php $i++;
-            } ?>
+            <?php } ?>
         </div>
     </main>
     <!-- Footer -->
@@ -256,6 +303,30 @@ $i = 0;
             </div>
         </div>
     </footer>
+
+    <script>
+        /* Search Function */
+        function filterList() {
+            /* Get the search input value (lowercase for case-insensitive matching) */
+            const query = document.getElementById('searchBar').value.toLowerCase().trim();
+
+            /* Get all item cards */
+            const cards = document.querySelectorAll('.item-card');
+
+            /* Loop through each card and show/hide based on match */
+            cards.forEach(card => {
+                /* Get the product name and description text */
+                const name = card.querySelector('.item-card-details h3')?.textContent.toLowerCase() || '';
+                const description = card.querySelector('.item-card-details p')?.textContent.toLowerCase() || '';
+
+                /* Check if query matches name or description */
+                const matches = name.includes(query) || description.includes(query);
+
+                /* Show or hide the card */
+                card.style.display = matches ? '' : 'none';
+            });
+        }
+    </script>
 </body>
 
 </html>
