@@ -29,7 +29,7 @@ $result = $conn->query("SELECT * FROM products ORDER BY productID");
             <li><a href="items.php">ITEMS</a></li>
         </ul>
         <div class="btns">
-            <a href="product.php" class="order-now-btn">ORDER NOW</a>
+            <a href="items.php" class="order-now-btn">ORDER NOW</a>
             <a href="cart.php" class="cart-btn"><span class="material-symbols-outlined">shopping_cart</span></a>
         </div>
     </nav>
