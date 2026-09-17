@@ -1,99 +1,232 @@
 <?php
-    session_start();
-    include 'connect.php';
+session_start();
+include 'connect.php';
 
-    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
-        header("Location: login.php");
-        exit();
-    }
-    if (!isset($_SESSION['role']) || $_SESSION['role'] != 'member') {
-        header("Location: login.php");
-        exit();
-    }
-    if (!isset($_SESSION['userID'])) {
-        header("Location: login.php");
-        exit();
-    }
-    $userID = $_SESSION['userID'];
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
+    header("Location: login.php");
+    exit();
+}
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'member') {
+    header("Location: login.php");
+    exit();
+}
+if (!isset($_SESSION['userID'])) {
+    header("Location: login.php");
+    exit();
+}
+$userID = $_SESSION['userID'];
 
-    // Handle adding items to the cart
-    if (isset($_POST['add_to_cart'])) {
+// Handle adding items to the cart
+if (isset($_POST['add_to_cart'])) {
 
-        $productID = $_POST['productID'];
+    $productID = $_POST['productID'];
 
-        // If product is already in cart, increase quantity
-        $stmt = $conn->prepare("SELECT quantity 
+    // If product is already in cart, increase quantity
+    $stmt = $conn->prepare("SELECT quantity 
                                 FROM cart 
                                 WHERE userID = ? AND productID = ?");
-        $stmt->bind_param("ii", $userID, $productID);
-        $stmt->execute();
+    $stmt->bind_param("ii", $userID, $productID);
+    $stmt->execute();
 
-        $result = $stmt->get_result();
+    $result = $stmt->get_result();
 
-        if ($result->num_rows > 0) {
-            $stmt = $conn->prepare("UPDATE cart 
+    if ($result->num_rows > 0) {
+        $stmt = $conn->prepare("UPDATE cart 
                                     SET quantity = quantity + 1 
                                     WHERE userID = ? AND productID = ?");
-            $stmt->bind_param("ii", $userID, $productID);
-            $stmt->execute();
-        }
-        else {
-            // Product quantity doesn't exist
-            $quantity = 1;
+        $stmt->bind_param("ii", $userID, $productID);
+        $stmt->execute();
+    } else {
+        // Product quantity doesn't exist
+        $quantity = 1;
 
-            $stmt = $conn->prepare("INSERT INTO cart (userID, productID, quantity)
-                                   VALUES (?, ?, ?)");
-            $stmt->bind_param("iii", $userID, $productID, $quantity);
-            $stmt->execute();
-        }
-        header("Location: cart.php");
+        $stmt = $conn->prepare("INSERT INTO cart (userID, productID, quantity)
+                                    VALUES (?, ?, ?)");
+        $stmt->bind_param("iii", $userID, $productID, $quantity);
+        $stmt->execute();
     }
-?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Your Shopping Cart</title>
-</head>
-
-<body>
-
-    <h2>Your Cart</h2>
-
-    <?php
-        $stmt = $conn->prepare("SELECT cart.productID, cart.quantity, products.name, products.price 
+    header("Location: cart.php");
+    exit();
+}
+$stmt = $conn->prepare("SELECT cart.productID, cart.quantity, products.name, products.price 
                                 FROM cart
                                 INNER JOIN products
                                     ON cart.productID = products.productID
                                 WHERE cart.userID = ?");
-        $stmt->bind_param("i", $userID);
-        $stmt->execute();
+$stmt->bind_param("i", $userID);
+$stmt->execute();
 
-        $result = $stmt->get_result();
+$result = $stmt->get_result();
 
-        $total = 0;
+$total = 0;
+?>
 
-        while ($product  = $result->fetch_assoc()) {
-            $subtotal = $product['price'] * $product['quantity'];
+<!DOCTYPE html>
+<html lang="en">
 
-            $total += $subtotal;
-
-            echo "<div>";
-
-            echo "<p>";
-            echo htmlspecialchars($product['name']);
-            echo " - Qty: " . $product['quantity'];
-            echo " - RM " . number_format($subtotal, 2);
-            echo "</p>";
-
-            echo "</div>";
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Shopping Cart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&imgon_names=shopping_cart" />
+    <link rel="stylesheet" href="style.css"> <!-- For Navigation Bar -->
+    <style>
+        /* Main Content */
+        h1 {
+            padding: 1rem 5%;
+            padding-bottom: unset;
+            font-family: chewy;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 3px;
         }
-        echo "<h3>Total: RM " . number_format($total, 2) . "</h3>";
-        
-        echo '<a href="index.php">Continue Shopping</a><br><br>';
 
-        echo '<button type="button">Proceed to Checkout</button>';
-    ?>
+        .edit-btns {
+            text-align: end;
+            margin-right: 8%;
+            margin-bottom: 1rem;
+        }
 
+        .edit-btn {
+            border: none;
+            cursor: pointer;
+            font-size: 1.08rem;
+            letter-spacing: 1px;
+        }
+
+        .edit-btn a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .cart-container {
+            border: 1px solid black;
+            border-radius: 20px;
+            margin: 0 3%;
+            padding: 1rem 2rem;
+            align-items: center;
+        }
+
+        .cart-empty {
+            text-align: center;
+            color: orangered;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .cart-items {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 1rem;
+        }
+
+        .cart-items p {
+            font-size: 1.2rem;
+        }
+
+        .total-price {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem;
+            margin-bottom: unset;
+        }
+
+        .down-btns {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 1rem 3%;
+        }
+
+        .cont-btn {
+            font-size: 1.2rem;
+            cursor: pointer;
+
+            transition: color 0.3 ease;
+        }
+
+        .cont-btn:hover {
+            color: blue;
+        }
+
+        .checkout-btn {
+            font-size: 1.02rem;
+            padding: 0.25rem .35rem;
+            border: 1px solid black;
+            border-radius: 10px;
+            cursor: pointer;
+
+            transition: transform 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">
+            <a href="index.php">CUNA'S BAKERY</a>
+        </div>
+        <ul class="links">
+            <li><a href="index.php">HOME</a></li>
+            <li><a href="products.php">ITEMS</a></li>
+        </ul>
+        <div class="btns">
+            <a href="products.php" class="order-now-btn">ORDER NOW</a>
+            <a href="cart.php" class="cart-btn"><span class="material-symbols-outlined">shopping_cart</span></a>
+        </div>
+    </nav>
+    <!-- Main Content -->
+    <main>
+        <h1>Shopping Cart</h1>
+        <!-- Method for Edit Functionality -->
+        <form action="cart_edit.php" method="GET">
+            <!-- Edit Button -->
+            <div class="edit-btns">
+                <button type="submit" class="edit-btn">EDIT</button>
+            </div>
+            <!-- Cart -->
+            <div class="cart-container">
+                <?php
+                /* Check Cart */
+                if (mysqli_num_rows($result) > 0) {
+                    while ($product  = $result->fetch_assoc()) {
+                        $subtotal = $product['price'] * $product['quantity'];
+
+                        $total += $subtotal; ?>
+                        <!-- Cart Items -->
+                        <div class="cart-items">
+                            <input type="radio" name="productID" value="<?= $product['productID'] ?>">
+                            <p><?= htmlspecialchars($product['name']); ?></p>
+                            <p>QTY: x<?= $product['quantity']; ?> </p>
+                            <p>RM <?= number_format($subtotal, 2); ?> </p>
+                        </div>
+                        <hr>
+                <?php }
+                } else {
+                    /* if Cart is Empty */
+                    echo "<div class='cart-empty'><p>Cart Is Empty</p></div><hr>";
+                } ?>
+                <!-- Total Price -->
+                <div class="total-price">
+                    <h3>Total:</h3>
+                    <h3><?= number_format($total, 2); ?> </h3>
+                </div>
+            </div>
+        </form>
+        <!-- Continue or Checkout Button -->
+        <div class="down-btns">
+            <a class="cont-btn" onclick="history.go(-1)">Continue Shopping</a><br><br>
+            <button type="button" class="checkout-btn">CHECKOUT</button>
+        </div>
+    </main>
 </body>
+
 </html>
