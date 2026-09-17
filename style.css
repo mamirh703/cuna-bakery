@@ -14,9 +14,11 @@ body {
 body {
     background-color: #F4EBE7;
 }
-
-/* Navbar */
-
+/*
+######################
+### Navigation Bar ###
+######################
+*/
 nav {
     width: 100%;
     padding: 1rem 5%;
@@ -40,7 +42,6 @@ nav {
 }
 
 /* nav links */
-
 .links {
     list-style: none;
     padding: 0;
@@ -60,7 +61,6 @@ nav {
 }
 
 /* nav buttons */
-
 .btns {
     display: flex;
     align-items: center;
@@ -83,61 +83,17 @@ nav {
     background-color: lightgray;
     border: 1px solid black;
 }
-
-/* main content */
-
-/* items.php Title dan Search Bar */
-
-.header {
-    display: flex;
-    align-items: center;
-    padding: 1rem 5%;
-    justify-content: space-between;
-}
-
-.header h1 {
-    font-family: chewy;
-    font-size: 3rem;
-    font-weight: 700;
-    letter-spacing: 3px;
-}
-
-/* Search bar */
-
-.searchBar {
-    position: relative;
-    display: flex;
-    width: 100%;
-    max-width: 500px;
-    margin-left: 1rem;
-}
-
-.search-icon {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #888;
-    pointer-events: none;
-}
-
-.search-input {
-    padding-left: 40px;
-    padding-right: 15px;
-    width: 100%;
-    height: 40px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    outline: none;
-}
-
-/* Index.php */
-
+/*
+#################
+### index.php ###
+#################
+*/
 .about {
     padding-top: 2rem;
     height: 100vh;
 }
 
+/* background shape1 */
 .shape1 {
     height: 475px;
     margin: 0 3%;
@@ -152,7 +108,6 @@ nav {
 }
 
 /* Shape title */
-
 .shape1 h1 {
     font-family: chewy;
     font-size: 3rem;
@@ -164,7 +119,6 @@ nav {
 }
 
 /* Details */
-
 .para {
     position: absolute;
     top: 245px;
@@ -203,11 +157,7 @@ nav {
 }
 
 /* Popular content */
-
-/* .popular {
-    margin-bottom: 3rem;
-} */
-
+/* background shape2 */
 .shape2 {
     padding: 3rem 1rem;
     margin: 0 3%;
@@ -221,6 +171,7 @@ nav {
             close);
 }
 
+/* shape title */
 .shape2 h1 {
     font-family: chewy;
     font-size: 3rem;
@@ -230,6 +181,7 @@ nav {
     color: #331813;
 }
 
+/* View all link */
 .shape2 h6,
 .shape2 a {
     text-decoration: none;
@@ -246,8 +198,8 @@ nav {
     /* text-decoration: underline; */
 }
 
+/* index.php | items.php | admin.php */
 /* Grid box for popular item */
-
 .item-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, 370px);
@@ -292,6 +244,7 @@ nav {
     gap: 2px;
 }
 
+/* details button */
 .item-details {
     height: 35px;
     padding: 0 10px;
@@ -305,6 +258,7 @@ nav {
     background-color: rgb(255, 255, 128);
 }
 
+/* cart button */
 .item-cart {
     height: 35px;
     padding: 0 10px;
@@ -318,30 +272,7 @@ nav {
     background-color: rgb(255, 192, 74);
 }
 
-/* Add Item Card */
-.add-item {
-    background-color: #FFF7EA;
-    height: 100%;
-    border: 3px solid black;
-    border-radius: 30px;
-    
-    transition: transform 0.3s ease;
-}
-
-.add-item a{
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.add-item:hover {
-    transform: scale(1.01);
-}
-
 /* Popover details */
-
 [popover] {
     position: fixed;
     inset: 0;
@@ -358,9 +289,190 @@ nav {
     background: rgba(0, 0, 0, .08);
     backdrop-filter: blur(2px);
 }
+/* 
+#################
+### admin.php ###
+#################
+*/
 
-/* Footer */
+/* Add Item Card */
+.add-item {
+    background-color: #FFF7EA;
+    height: 100%;
+    border: 3px solid black;
+    border-radius: 30px;
 
+    transition: transform 0.3s ease;
+}
+
+.add-item a {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-item:hover {
+    transform: scale(1.01);
+}
+/* 
+#################
+### items.php ###
+#################
+*/
+.header {
+    display: flex;
+    align-items: center;
+    padding: 1rem 5%;
+    justify-content: space-between;
+}
+
+/* tilte */
+.header h1 {
+    padding: 1rem 5%;
+    padding-bottom: unset;
+    font-family: chewy;
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+/* Search bar */
+.searchBar {
+    position: relative;
+    display: flex;
+    width: 100%;
+    max-width: 500px;
+    margin-left: 1rem;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    pointer-events: none;
+}
+
+.search-input {
+    padding-left: 40px;
+    padding-right: 15px;
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+}
+/* 
+################
+### cart.php ###
+################
+*/
+
+/* Edit Button */
+.edit-btns {
+    text-align: end;
+    margin-right: 8%;
+    margin-bottom: 1rem;
+}
+
+.edit-btn {
+    border: none;
+    cursor: pointer;
+    font-size: 1.08rem;
+    letter-spacing: 1px;
+}
+
+.edit-btn a {
+    text-decoration: none;
+    color: black;
+}
+
+.cart-container {
+    border: 1px solid black;
+    border-radius: 20px;
+    margin: 0 3%;
+    padding: 1rem 2rem;
+    align-items: center;
+}
+
+/* If Cart Empty */
+.cart-empty {
+    text-align: center;
+    color: orangered;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.cart-items {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    margin: 1%;
+}
+
+/* combine radio button, img and name */
+.first-childe {
+    display: flex;
+    align-items: center;
+    gap: clamp(0rem, 1rem, 2rem);
+}
+
+.cart-items img {
+    height: 80px;
+}
+
+.cart-items p {
+    font-size: 1.2rem;
+}
+
+.total-price {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+    margin-bottom: unset;
+}
+
+.down-btns {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem 3%;
+}
+/* Continue Shop Button */
+.cont-btn {
+    font-size: 1.2rem;
+    cursor: pointer;
+
+    transition: color 0.3 ease;
+}
+
+.cont-btn:hover {
+    color: blue;
+}
+
+/* Checkout Button */
+.checkout-btn {
+    font-size: 1.02rem;
+    padding: 0.25rem .35rem;
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+
+    transition: transform 0.3s ease;
+}
+
+.checkout-btn:hover {
+    transform: scale(1.05);
+}
+/*
+##############
+### footer ###
+##############
+*/
 footer {
     display: flex;
     justify-content: space-between;
@@ -418,5 +530,13 @@ footer {
 
     .cart-btn {
         padding: 3px 5px 2px 6px;
+    }
+    
+    .cart-items img {
+        height: 50px;
+    }
+
+    .cart-items p {
+        font-size: 1rem;
     }
 }
