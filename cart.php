@@ -72,120 +72,6 @@ $total = 0;
     <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&imgon_names=shopping_cart" />
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Main Content */
-        h1 {
-            padding: 1rem 5%;
-            padding-bottom: unset;
-            font-family: chewy;
-            font-size: 3rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-        }
-        /* Edit Button */
-        .edit-btns {
-            text-align: end;
-            margin-right: 8%;
-            margin-bottom: 1rem;
-        }
-
-        .edit-btn {
-            border: none;
-            cursor: pointer;
-            font-size: 1.08rem;
-            letter-spacing: 1px;
-        }
-
-        .edit-btn a {
-            text-decoration: none;
-            color: black;
-        }
-
-        .cart-container {
-            border: 1px solid black;
-            border-radius: 20px;
-            margin: 0 3%;
-            padding: 1rem 2rem;
-            align-items: center;
-        }
-        /* If Cart Empty */
-        .cart-empty {
-            text-align: center;
-            color: orangered;
-            font-size: 1.4rem;
-            font-weight: 600;
-        }
-
-        .cart-items {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            text-align: center;
-            margin: 1%;
-        }
-        /* combine radio button, img and name */
-        .first-childe {
-            display: flex;
-            align-items: center;
-            gap: clamp(0rem, 1rem, 2rem);
-        }
-
-        .cart-items img {
-            height: 80px;
-        }
-
-        .cart-items p {
-            font-size: 1.2rem;
-        }
-
-        .total-price {
-            display: flex;
-            justify-content: space-between;
-            margin: 1rem;
-            margin-bottom: unset;
-        }
-        /* Continue and Checkout Button */
-        .down-btns {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: 1rem 3%;
-        }
-
-        .cont-btn {
-            font-size: 1.2rem;
-            cursor: pointer;    
-
-            transition: color 0.3 ease;
-        }
-
-        .cont-btn:hover {
-            color: blue;
-        }
-
-        .checkout-btn {
-            font-size: 1.02rem;
-            padding: 0.25rem .35rem;
-            border: 1px solid black;
-            border-radius: 10px;
-            cursor: pointer;
-
-            transition: transform 0.3s ease;
-        }
-
-        .checkout-btn:hover {
-            transform: scale(1.05);
-        }
-        /* Mobile responsive */
-        @media (max-width: 480px) {
-            .cart-items img {
-                height: 50px;
-            }
-            .cart-items p {
-                font-size: 1rem;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -205,7 +91,9 @@ $total = 0;
     </nav>
     <!-- Main Content -->
     <main>
-        <h1>Shopping Cart</h1>
+        <div class="header">
+            <h1>Shopping Cart</h1>
+        </div>
         <!-- Method for Edit Functionality -->
         <form action="cart_edit.php" method="GET">
             <!-- Edit Button -->
