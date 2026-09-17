@@ -199,7 +199,7 @@ $total = 0;
             <li><a href="items.php">ITEMS</a></li>
         </ul>
         <div class="btns">
-            <a href="products.php" class="order-now-btn">ORDER NOW</a>
+            <a href="items.php" class="order-now-btn">ORDER NOW</a>
             <a href="cart.php" class="cart-btn"><span class="material-symbols-outlined">shopping_cart</span></a>
         </div>
     </nav>
