@@ -72,6 +72,20 @@ $i = 0; */
             <?php } ?>
         </div>
     </main>
+    <!-- Footer -->
+    <footer>
+        <div class="brand-footer">
+            <p>CUNA'S BAKERY</p>
+        </div>
+        <div class="footer-kanan">
+            <p>"SWEET AROMA COMES FROM HOMES"</p>
+            <div class="footer-kanan-span">
+                <span><i class="fab fa-facebook-f"></i> cunasbakery </span>
+                <span><i class="far fa-envelope"></i> cunasbakery</span>
+                <span><i class="fab fa-whatsapp"></i> 012-3456789</span>
+            </div>
+        </div>
+    </footer>
     
     <script>
         /* Search Function */
