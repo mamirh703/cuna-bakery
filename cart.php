@@ -196,7 +196,7 @@ $total = 0;
         </div>
         <ul class="links">
             <li><a href="index.php">HOME</a></li>
-            <li><a href="products.php">ITEMS</a></li>
+            <li><a href="items.php">ITEMS</a></li>
         </ul>
         <div class="btns">
             <a href="products.php" class="order-now-btn">ORDER NOW</a>
