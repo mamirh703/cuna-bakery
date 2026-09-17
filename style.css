@@ -204,9 +204,9 @@ nav {
 
 /* Popular content */
 
-.popular {
+/* .popular {
     margin-bottom: 3rem;
-}
+} */
 
 .shape2 {
     padding: 3rem 1rem;
@@ -263,6 +263,7 @@ nav {
     background-color: #FFF7EA;
     padding: 2rem 1rem;
     pading-top: unset;
+    border: 2px solid black;
     border-radius: 150px;
     corner-shape: scoop squircle square square;
 }
@@ -317,6 +318,28 @@ nav {
     background-color: rgb(255, 192, 74);
 }
 
+/* Add Item Card */
+.add-item {
+    background-color: #FFF7EA;
+    height: 100%;
+    border: 3px solid black;
+    border-radius: 30px;
+    
+    transition: transform 0.3s ease;
+}
+
+.add-item a{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-item:hover {
+    transform: scale(1.01);
+}
+
 /* Popover details */
 
 [popover] {
@@ -343,6 +366,7 @@ footer {
     justify-content: space-between;
     align-items: center;
     padding: 2.5rem 5%;
+    margin-top: 2rem;
     background: rgba(255, 255, 255, 0.5);
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(15px);
