@@ -25,13 +25,13 @@ $i = 0;
 <body>
     <!-- Navbar -->
     <nav>
-        <div class="logo"><a href="#">CUNA'S BAKERY</a></div>
+        <div class="logo"><a href="index.php">CUNA'S BAKERY</a></div>
         <ul class="links">
             <li><a href="index.php">HOME</a></li>
             <li><a href="items.php">ITEMS</a></li>
         </ul>
         <div class="btns">
-            <a href="product.php" class="order-now-btn">ORDER NOW</a>
+            <a href="items.php" class="order-now-btn">ORDER NOW</a>
             <a href="cart.php" class="cart-btn"><span class="material-symbols-outlined">shopping_cart</span></a>
         </div>
     </nav>
@@ -46,7 +46,7 @@ $i = 0;
                         Lorem ipsum dolor sit amet et delectus accommodare his consul copiosae legendos at vix ad putent delectus delimgata usu. Vidit dissentiet eos cu eum
                     </p><br>
                     <div class="btns">
-                        <a href="" class="order-btn">ORDER NOW</a>
+                        <a href="items.php" class="order-btn">ORDER NOW</a>
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@ $i = 0;
                     <?php $i++;
                     } ?>
                 </div>
-                <h6><a href="">VIEW ALL</a></h6>
+                <h6><a href="items.php">VIEW ALL</a></h6>
             </div>
         </div>
     </main>
