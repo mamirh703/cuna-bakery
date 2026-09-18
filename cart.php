@@ -134,7 +134,7 @@ $total = 0;
         </form>
         <!-- Continue or Checkout Button -->
         <div class="down-btns">
-            <a class="cont-btn" onclick="history.go(-1)">Continue Shopping</a><br><br>
+            <a href="items.php" class="cont-btn">Continue Shopping</a><br><br>
             <button type="button" class="checkout-btn">CHECKOUT</button>
         </div>
     </main>
