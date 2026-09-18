@@ -156,7 +156,7 @@ nav {
     width: 100%;
 }
 
-/* Popular content */
+/* ## Popular content ## */
 /* background shape2 */
 .shape2 {
     padding: 3rem 1rem;
@@ -198,7 +198,7 @@ nav {
     /* text-decoration: underline; */
 }
 
-/* index.php | items.php | admin.php */
+/* ### index.php | items.php | admin.php ### */
 /* Grid box for popular item */
 .item-grid {
     display: grid;
@@ -316,11 +316,7 @@ nav {
 .add-item:hover {
     transform: scale(1.01);
 }
-/* 
-#################
-### items.php ###
-#################
-*/
+/* ## Items.php | cart.php | cart_edit.php ## */
 .header {
     display: flex;
     align-items: center;
@@ -337,7 +333,11 @@ nav {
     font-weight: 700;
     letter-spacing: 3px;
 }
-
+/* 
+#################
+### items.php ###
+#################
+*/
 /* Search bar */
 .searchBar {
     position: relative;
@@ -390,20 +390,24 @@ nav {
     color: black;
 }
 
-.cart-container {
-    border: 1px solid black;
-    border-radius: 20px;
-    margin: 0 3%;
-    padding: 1rem 2rem;
-    align-items: center;
-}
-
 /* If Cart Empty */
 .cart-empty {
     text-align: center;
     color: orangered;
     font-size: 1.4rem;
     font-weight: 600;
+}
+/* 
+################
+### cart.php ###
+################
+*/
+.cart-container {
+    border: 1px solid black;
+    border-radius: 20px;
+    margin: 0 3%;
+    padding: 1rem 2rem;
+    align-items: center;
 }
 
 .cart-items {
@@ -442,6 +446,7 @@ nav {
     justify-content: space-between;
     margin: 1rem 3%;
 }
+
 /* Continue Shop Button */
 .cont-btn {
     font-size: 1.2rem;
@@ -458,7 +463,6 @@ nav {
 .checkout-btn {
     font-size: 1.02rem;
     padding: 0.25rem .35rem;
-    border: 1px solid black;
     border-radius: 10px;
     cursor: pointer;
 
@@ -467,6 +471,18 @@ nav {
 
 .checkout-btn:hover {
     transform: scale(1.05);
+}
+
+/* ## cart_edit.php ## */
+.edit-qty {
+    width: 45px;
+    height: 30px;
+    font-size: 1rem;
+}
+
+.btn {
+    display: flex;
+    justify-content: flex-end;
 }
 /*
 ##############
