@@ -135,7 +135,7 @@ $total = 0;
         <!-- Continue or Checkout Button -->
         <div class="down-btns">
             <a href="items.php" class="cont-btn">Continue Shopping</a><br><br>
-            <button type="button" class="checkout-btn">CHECKOUT</button>
+            <a href="checkout.php"><button type="button" class="checkout-btn ">CHECKOUT</button></a>
         </div>
     </main>
 </body>
