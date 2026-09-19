@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 14, 2026 at 07:31 PM
+-- Generation Time: Sep 19, 2026 at 10:30 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,22 +41,7 @@ CREATE TABLE `cart` (
 INSERT INTO `cart` (`cartID`, `userID`, `productID`, `quantity`) VALUES
 (1, 3, 1, 2),
 (2, 3, 2, 1),
-(3, 3, 3, 1),
-(7, 2, 1, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `orderdetails`
---
-
-CREATE TABLE `orderdetails` (
-  `order_detailID` varchar(10) NOT NULL,
-  `orderID` varchar(10) NOT NULL,
-  `productID` int(11) DEFAULT NULL,
-  `quantity` int(11) NOT NULL,
-  `subtotal` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(3, 3, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -65,29 +50,41 @@ CREATE TABLE `orderdetails` (
 --
 
 CREATE TABLE `orders` (
-  `orderID` varchar(10) NOT NULL,
-  `userID` int(10) NOT NULL,
-  `order_date` date NOT NULL,
-  `total_amount` decimal(10,2) NOT NULL,
-  `order_status` varchar(30) NOT NULL,
-  `shipping_address` varchar(255) DEFAULT NULL
+  `orderID` int(11) NOT NULL,
+  `userID` int(11) NOT NULL,
+  `orderDate` datetime DEFAULT current_timestamp(),
+  `totalAmount` decimal(10,2) NOT NULL,
+  `status` varchar(30) DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`orderID`, `userID`, `orderDate`, `totalAmount`, `status`) VALUES
+(1, 2, '2026-09-19 16:22:23', 13.00, 'Pending');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `payments`
+-- Table structure for table `order_items`
 --
 
-CREATE TABLE `payments` (
-  `paymentID` varchar(10) NOT NULL,
-  `orderID` varchar(10) NOT NULL,
-  `paymentDate` date NOT NULL,
-  `amount` decimal(10,2) NOT NULL,
-  `payment_method` varchar(50) NOT NULL,
-  `payment_status` varchar(30) NOT NULL,
-  `transactionID` varchar(100) DEFAULT NULL
+CREATE TABLE `order_items` (
+  `orderItemID` int(11) NOT NULL,
+  `orderID` int(11) NOT NULL,
+  `productID` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`orderItemID`, `orderID`, `productID`, `quantity`, `price`) VALUES
+(1, 1, 1, 1, 6.00),
+(2, 1, 2, 1, 7.00);
 
 -- --------------------------------------------------------
 
@@ -149,26 +146,19 @@ ALTER TABLE `cart`
   ADD KEY `productID` (`productID`);
 
 --
--- Indexes for table `orderdetails`
---
-ALTER TABLE `orderdetails`
-  ADD PRIMARY KEY (`order_detailID`),
-  ADD KEY `orderID` (`orderID`),
-  ADD KEY `productID` (`productID`);
-
---
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`orderID`),
-  ADD KEY `customerID` (`userID`);
+  ADD KEY `userID` (`userID`);
 
 --
--- Indexes for table `payments`
+-- Indexes for table `order_items`
 --
-ALTER TABLE `payments`
-  ADD PRIMARY KEY (`paymentID`),
-  ADD KEY `orderID` (`orderID`);
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`orderItemID`),
+  ADD KEY `orderID` (`orderID`),
+  ADD KEY `productID` (`productID`);
 
 --
 -- Indexes for table `products`
@@ -191,7 +181,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cartID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `cartID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `orderItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -217,23 +219,17 @@ ALTER TABLE `cart`
   ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`);
 
 --
--- Constraints for table `orderdetails`
---
-ALTER TABLE `orderdetails`
-  ADD CONSTRAINT `orderdetails_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `orders` (`orderID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `orderdetails_ibfk_2` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`) ON UPDATE CASCADE;
-
---
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`);
 
 --
--- Constraints for table `payments`
+-- Constraints for table `order_items`
 --
-ALTER TABLE `payments`
-  ADD CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `orders` (`orderID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `order_items`
+  ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `orders` (`orderID`),
+  ADD CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
