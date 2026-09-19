@@ -3,8 +3,8 @@ include "connect.php";
 session_start();
 
 $result = $conn->query("SELECT * FROM products ORDER BY productID");
-/* $classes = ['c1', 'c2', 'c3','c4'];
-$i = 0; */
+$classes = ['c1', 'c2', 'c3','c4'];
+$i = 0;
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +49,7 @@ $i = 0; */
             <!-- Child -->
             <div class="item-card">
                 <div class="item-card-img">
-                    <img src="uploads/u good.jpg">
+                    <img src="<?= htmlspecialchars($row['image'])?>">
                 </div>
                 <div class="item-card-details">
                     <h3><?php echo htmlspecialchars($row['name']) ?></h3>
@@ -59,7 +59,7 @@ $i = 0; */
                 <div class="item-card-button">
                     <button class="item-details <?= $row['productID'] ?>" popovertarget="pd <?= $row['productID'] ?>">DETAILS</button>
                     <dialog id="pd <?= $row['productID'] ?>" popover>
-                        <img src="uploads/u good.jpg">
+                        <img src="<?= htmlspecialchars($row['image'])?>">
                         <p><?= htmlspecialchars($row['description']) ?></p>
                     </dialog>
                     <form method="POST" action="cart.php" style="display:inline;">

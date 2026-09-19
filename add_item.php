@@ -6,15 +6,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-item'])) {
     $name        = trim($_POST['name'] ?? '');
     $description = trim($_POST['description'] ?? '');
     $price       = $_POST['price'] ?? '';
+    $uploadDir   = "uploads/";
 
-    $stmt = $conn->prepare("INSERT INTO products (name, description, price) VALUES (?, ?, ?)");
-    $stmt->bind_param("ssd", $name, $description, $price);
-    $stmt->execute();
+    $imageName = basename($_FILES["image"]["name"]);
+    $imagePath = $uploadDir . time() . "_" . $imageName;
+    
+    if (move_uploaded_file($_FILES["image"]["tmp_name"], $imagePath)) {
 
-    echo "<script>alert('Item successfully added');
-            window.location='admin.php';
-            </script>";
-}
+        $stmt = $conn->prepare("INSERT INTO products (name, description, price, image) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssds", $name, $description, $price, $imagePath);
+        $stmt->execute();
+
+        echo "<script>alert('Item successfully added');
+                window.location='admin.php';
+                </script>";
+}}
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-item'])) {
         <h1>Add New Item</h1>
     </div>
     <div class="form-container">
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             <div class="add-form">
                 <label for="name">Item Name</label>
                 <input type="text" name="name" required value="<?= htmlspecialchars($name ?? '') ?>">
@@ -50,6 +56,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-item'])) {
                     <p class="currency">RM</p>
                     <input type="number" name="price" id="price" class="price-input" step="0.10" min="0" required value="<?= htmlspecialchars($price ?? '') ?>">
                 </div>
+                <label>Image</label>
+                <input type="file" class="form-control" name="image" accept="image/*"> 
             </div>
             <div class="down-btns">
                 <a href="admin.php" class="cont-btn">← Back to Items List</a>

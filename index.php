@@ -69,7 +69,7 @@ $i = 0;
                         <!-- Child -->
                         <div class="item-card">
                             <div class="item-card-img">
-                                <img src="uploads/u good.jpg">
+                                <img src="<?= htmlspecialchars($row['image']) ?>">
                             </div>
                             <div class="item-card-details">
                                 <h3><?php echo htmlspecialchars($row['name']) ?></h3>
@@ -79,7 +79,7 @@ $i = 0;
                             <div class="item-card-button">
                                 <button class="item-details <?= $classes[$i] ?>" popovertarget="pd <?= $classes[$i] ?>">DETAILS</button>
                                 <dialog id="pd <?= $classes[$i] ?>" popover>
-                                    <img src="uploads/u good.jpg">
+                                    <img src="<?= htmlspecialchars($row['image']) ?>">
                                     <p><?= htmlspecialchars($row['description']) ?></p>
                                 </dialog>
                                 <form method="POST" action="cart.php" style="display:inline;">
