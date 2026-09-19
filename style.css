@@ -422,6 +422,7 @@ textarea:focus {
 .add-form .price-input {
     padding-left: 55px;
 }
+
 /* 
 #################
 ### items.php ###
@@ -605,6 +606,65 @@ textarea:focus {
     border-radius: 10px;
     margin: 1rem 5%;
     padding: 5px 1%;
+}
+
+/* 
+########################
+### order_detail.php ###
+########################
+*/
+.order-container {
+    margin: 0 5%;
+}
+
+.order-container h2 {
+    margin-top: 20px;
+    font-family: 'Chewy', cursive;
+    font-size: 2rem;
+    letter-spacing: 2px;
+}
+
+.order-info {
+    display: flex;
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+.order-meta {
+    margin-right: auto;
+}
+
+.value {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.status {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 12px;
+    text-transform: capitalize;
+}
+
+.status.Pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status.Complete {
+    background: #d4edda;
+    color: #155724;
+}
+
+.order-total{
+    display: flex;
+}
+
+.order-total h3 {
+    margin-left: auto;
+    margin-right: 5%;
 }
 
 /*
