@@ -52,7 +52,10 @@
 
     // Don't create an empty order
     if (empty($items)) {
-        header("Location: cart.php");
+        echo "<script>
+                alert('Your cart is empty! Please add a product before checkout.');
+                window.location.href = 'cart.php';
+            </script>";
         exit();
     }
 
