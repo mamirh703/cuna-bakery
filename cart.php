@@ -52,7 +52,8 @@ $stmt = $conn->prepare("SELECT cart.productID, cart.quantity, products.name, pro
                                 FROM cart
                                 INNER JOIN products
                                     ON cart.productID = products.productID
-                                WHERE cart.userID = ?");
+                                WHERE cart.userID = ?
+                                ORDER BY cart.productID");
 $stmt->bind_param("i", $userID);
 $stmt->execute();
 
@@ -135,7 +136,9 @@ $total = 0;
         <!-- Continue or Checkout Button -->
         <div class="down-btns">
             <a href="items.php" class="cont-btn">Continue Shopping</a><br><br>
-            <a href="checkout.php"><button type="button" class="checkout-btn ">CHECKOUT</button></a>
+            <form method="POST" action="checkout.php" onsubmit="return confirm('Place in Order?')">
+                <button type="submit" name="checkout" class="checkout-btn">CHECKOUT</button>
+            </form>
         </div>
     </main>
 </body>
