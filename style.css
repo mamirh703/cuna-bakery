@@ -93,6 +93,7 @@ nav {
 .about {
     padding-top: 2rem;
     height: 100vh;
+    height: 100dvh;
 }
 
 /* background shape1 */
@@ -112,7 +113,7 @@ nav {
 /* Shape title */
 .shape1 h1 {
     font-family: chewy;
-    font-size: 3rem;
+    font-size: clamp(1rem, 10vw, 3rem);
     font-weight: 700;
     letter-spacing: 1px;
     padding-top: 1rem;
@@ -176,7 +177,7 @@ nav {
 /* shape title */
 .shape2 h1 {
     font-family: chewy;
-    font-size: 3rem;
+    font-size: clamp(1rem, 10vw, 3rem);
     font-weight: 700;
     letter-spacing: 1px;
     text-align: center;
@@ -204,7 +205,7 @@ nav {
 /* Grid box for popular item */
 .item-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 370px);
+    grid-template-columns: repeat(auto-fit, min(370px, 95%));
     gap: 1rem;
     align-items: center;
     justify-content: center;
@@ -644,6 +645,8 @@ footer {
 
 /* mobile view */
 @media (max-width:480px) {
+
+    /* navbar */
     .logo a {
         font-size: 1.4rem;
     }
@@ -670,11 +673,38 @@ footer {
         padding: 3px 5px 2px 6px;
     }
 
+    /* index.php */
+    .btns {
+        justify-content: center;
+    }
+
+    .para {
+        position: relative;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+    }
+
+    .para p {
+        font-size: unset;
+    }
+
+    .img {
+        top: 353px;
+    }
+
+    /* cart.php */
     .cart-items img {
         height: 50px;
     }
 
     .cart-items p {
         font-size: 1rem;
+    }
+}
+
+@media (max-height: 726px) {
+    .shape2 {
+        margin-top: 50px;
     }
 }
