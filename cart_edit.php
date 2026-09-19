@@ -44,6 +44,7 @@ if ($result->num_rows === 0) {
 
 $product = $result->fetch_assoc();
 
+//  Update Item
 if (isset($_POST['update'])) {
     $newQty = max(1, $_POST['quantity']); // never below 1
 
@@ -56,6 +57,18 @@ if (isset($_POST['update'])) {
             alert('Item updated successfuly'); 
             window.location='cart.php';
             </script>";
+}
+
+// Delete Item
+if (isset($_POST['delete_item'])) {
+    $pid = (int)$_POST['productID'];
+    $stmt = $conn->prepare("DELETE FROM cart WHERE userID = ? AND productID = ?");
+    $stmt->bind_param("ii", $userID, $pid);
+    $stmt->execute();
+    echo "<script>alert('Item has been removed');
+            window.location='cart.php';
+            </script>";
+    exit();
 }
 ?>
 
@@ -108,8 +121,14 @@ if (isset($_POST['update'])) {
                 </div>
                 <hr><br>
                 <div class="btn">
-                    <button class="checkout-btn" type="submit" name="update">Update</button>
+                    <button class="checkout-btn" type="submit" name="update">UPDATE</button>
                 </div>
+            </div>
+        </form>
+        <form method="POST" onsubmit="return confirm('Remove this item from your cart?');">
+            <input type="hidden" name="productID" value="<?= $productID ?>">
+            <div class="btn" style="margin: 1rem 3%;">
+                <button type="submit" name="delete_item" class="checkout-btn">REMOVE ITEM</button>
             </div>
         </form>
     </main>
