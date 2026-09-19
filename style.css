@@ -14,6 +14,7 @@ body {
 body {
     background-color: #F4EBE7;
 }
+
 /*
 ######################
 ### Navigation Bar ###
@@ -83,6 +84,7 @@ nav {
     background-color: lightgray;
     border: 1px solid black;
 }
+
 /*
 #################
 ### index.php ###
@@ -289,14 +291,15 @@ nav {
     background: rgba(0, 0, 0, .08);
     backdrop-filter: blur(2px);
 }
+
 /* 
 #################
 ### admin.php ###
 #################
 */
-
 /* Add Item Card */
 .add-item {
+    display: flex;
     background-color: #FFF7EA;
     height: 100%;
     border: 3px solid black;
@@ -306,7 +309,7 @@ nav {
 }
 
 .add-item a {
-    height: 100%;
+    height: 424.2px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -316,7 +319,8 @@ nav {
 .add-item:hover {
     transform: scale(1.01);
 }
-/* ## Items.php | cart.php | cart_edit.php ## */
+
+/* ## Items.php | cart.php | cart_edit.php | add_item.php ## */
 .header {
     display: flex;
     align-items: center;
@@ -332,6 +336,90 @@ nav {
     font-size: 3rem;
     font-weight: 700;
     letter-spacing: 3px;
+}
+
+/*
+####################
+### add_item.php ###
+####################
+*/
+.form-container {
+    display: flex;
+    justify-content: center;
+}
+
+.add-form {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 3rem 2rem;
+    width: clamp(20rem, 50vw, 50rem);
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.14);
+}
+
+.add-form label {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #a16b4b;
+    margin-bottom: 0.45rem;
+    padding-left: 0.2rem;
+}
+
+.add-form input,
+.add-form textarea {
+    width: 100%;
+    padding: 0.9rem 1.25rem;
+    font-size: 1rem;
+    background-color: #fffdfb;
+    border: 1.5px solid #edd9cb;
+    border-radius: 1.25rem;
+    outline: none;
+    transition: all 0.2s ease;
+    color: #2b1a0e;
+    font-weight: 450;
+    box-shadow: 0 2px 6px rgba(180, 130, 90, 0.03);
+}
+
+textarea {
+    height: 67px;
+    min-height: 50px;
+    width: 100%;
+    resize: vertical;
+}
+
+.add-form input:focus,
+textarea:focus {
+    border-color: #c48a5c;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(196, 138, 92, 0.12), 0 4px 12px rgba(140, 90, 50, 0.08);
+    transform: translateX(-1px);
+}
+
+.price-bar {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.currency {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    z-index: 10;
+    transform: translateY(-51%);
+    font-size: 1.1rem;
+    pointer-events: none;
+}
+
+.add-form .price-input {
+    padding-left: 55px;
 }
 /* 
 #################
@@ -365,6 +453,7 @@ nav {
     border-radius: 20px;
     outline: none;
 }
+
 /* 
 ################
 ### cart.php ###
@@ -397,6 +486,7 @@ nav {
     font-size: 1.4rem;
     font-weight: 600;
 }
+
 /* 
 ################
 ### cart.php ###
@@ -484,6 +574,38 @@ nav {
     display: flex;
     justify-content: flex-end;
 }
+
+/* 
+#################
+### order.php ###
+#################
+*/
+.order {
+    margin-left: 5%;
+}
+
+.table {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 1rem 5%;
+    padding: 5px 1%;
+}
+
+.order-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 1rem 5%;
+    padding: 5px 1%;
+}
+
 /*
 ##############
 ### footer ###
@@ -547,7 +669,7 @@ footer {
     .cart-btn {
         padding: 3px 5px 2px 6px;
     }
-    
+
     .cart-items img {
         height: 50px;
     }
