@@ -40,7 +40,9 @@ $orderResult = $stmt->get_result();
 $order = $orderResult->fetch_assoc();
 
 if (!$order) {
-    echo "Order not found.";
+    echo "<script>alert('Order not found.');
+            window.location.href='orders.php';
+            </script>";
     exit();
 }
 
@@ -80,106 +82,67 @@ $items = $stmt->get_result();
 </head>
 
 <body>
-
-<nav>
-    <div class="logo">
-        <a href="index.php">CUNA'S BAKERY</a>
-    </div>
-
-    <ul class="links">
-        <li><a href="index.php">HOME</a></li>
-        <li><a href="items.php">ITEMS</a></li>
-        <li><a href="orders.php">VIEW ORDERS</a></li>
-    </ul>
-
-    <div class="btns">
-        <a href="items.php" class="order-now-btn">ORDER NOW</a>
-        <a href="cart.php" class="cart-btn"><span class="material-symbols-outlined">shopping_cart</span></a>
-    </div>
-</nav>
-
-<main>
-
-    <div class="header">
-        <h1>ORDER DETAILS</h1>
-    </div>
-
-    <div class="order-info">
-
-        <h2>
-            Order #<?= htmlspecialchars($order['orderID']) ?>
-        </h2>
-
-        <p>
-            Date:
-            <?= htmlspecialchars($order['orderDate']) ?>
-        </p>
-
-        <p>
-            Status:
-            <?= htmlspecialchars($order['status']) ?>
-        </p>
-
-    </div>
-
-    <div class="table">
-        <p>ITEM</p>
-        <p>PRICE</p>
-        <p>QUANTITY</p>
-        <p>SUBTOTAL</p>
-    </div>
-
-    <?php if ($items->num_rows > 0): ?>
-
-        <?php while ($item = $items->fetch_assoc()): ?>
-
-            <?php
-            $subtotal = $item['price'] * $item['quantity'];
-            ?>
-
-            <div class="order-items">
-
-                <p>
-                    <?= htmlspecialchars($item['name']) ?>
-                </p>
-
-                <p>
-                    RM <?= number_format($item['price'], 2) ?>
-                </p>
-
-                <p>
-                    <?= htmlspecialchars($item['quantity']) ?>
-                </p>
-
-                <p>
-                    RM <?= number_format($subtotal, 2) ?>
-                </p>
-
-            </div>
-
-        <?php endwhile; ?>
-
-    <?php else: ?>
-
-        <div class="cart-empty">
-            <p>This order has no items.</p>
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">
+            <a href="index.php">CUNA'S BAKERY</a>
         </div>
-
-    <?php endif; ?>
-
-    <div class="order-total">
-
-        <h3>
-            Total:
-            RM <?= number_format($order['totalAmount'], 2) ?>
-        </h3>
-
-    </div>
-
-    <a href="orders.php">← Back to Orders</a>
-
-</main>
-
+        <ul class="links">
+            <li><a href="index.php">HOME</a></li>
+            <li><a href="items.php">ITEMS</a></li>
+            <li><a href="orders.php">VIEW ORDERS</a></li>
+        </ul>
+        <div class="btns">
+            <a href="items.php" class="order-now-btn">ORDER NOW</a>
+            <a href="cart.php" class="cart-btn"><span class="material-symbols-outlined">shopping_cart</span></a>
+        </div>
+    </nav>
+    <main>
+        <div class="header">
+            <h1>ORDER DETAILS</h1>
+        </div>
+        <div class="order-container">
+            <a href="orders.php">← Back to Orders</a>
+            <h2>Order #<?= htmlspecialchars($order['orderID']) ?></h2>
+            <div class="order-info">
+                <div class="order-meta">
+                    <p>Date: </p>
+                    <p class="value"><?= htmlspecialchars($order['orderDate']) ?></p>
+                </div>
+                <div class="order-meta">
+                    <p>Status: </p>
+                    <p class="value">
+                        <span class="status <?= htmlspecialchars($order['status']) ?>"><?= htmlspecialchars($order['status']) ?></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="table">
+            <p>ITEM</p>
+            <p>PRICE</p>
+            <p>QUANTITY</p>
+            <p>SUBTOTAL</p>
+        </div>
+        <?php
+        if ($items->num_rows > 0):
+            while ($item = $items->fetch_assoc()):
+                $subtotal = $item['price'] * $item['quantity']; ?>
+                <div class="order-items">
+                    <p><?= htmlspecialchars($item['name']) ?></p>
+                    <p>RM <?= number_format($item['price'], 2) ?></p>
+                    <p>x<?= htmlspecialchars($item['quantity']) ?></p>
+                    <p>RM <?= number_format($subtotal, 2) ?></p>
+                </div>
+            <?php endwhile; ?>
+            <div class="order-total">
+                <h3>Total: RM <?= number_format($order['totalAmount'], 2) ?></h3>
+            </div>
+        <?php else: ?>
+            <div class="cart-empty">
+                <p>This order has no items.</p>
+            </div>
+        <?php endif; ?>
+    </main>
 </body>
 
 </html>
