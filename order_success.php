@@ -32,8 +32,7 @@ $orderID = $_GET['orderID'] ?? '';
         <div class="add-form" style="gap: .5rem;">
             <h2>Your order has been placed.</h2>
             <h3>
-                Order ID:
-                <?php echo htmlspecialchars($orderID); ?>
+                Order ID: #<?php echo htmlspecialchars($orderID); ?>
             </h3>
             <div class="btn">
                 <button class="checkout-btn" onclick="window.location='orders.php'">View Order</button>
