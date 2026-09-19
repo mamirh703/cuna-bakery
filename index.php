@@ -34,6 +34,7 @@ $i = 0;
         <div class="btns">
             <a href="items.php" class="order-now-btn">ORDER NOW</a>
             <a href="cart.php" class="cart-btn"><span class="material-symbols-outlined">shopping_cart</span></a>
+            <a href="logout.php" class="order-now-btn">Logout</a>
         </div>
     </nav>
     <!-- Main Content -->

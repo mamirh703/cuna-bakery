@@ -66,6 +66,7 @@ $result = $stmt->get_result();
         <ul class="links">
             <li><a href="index.php">HOME</a></li>
             <li><a href="items.php">ITEMS</a></li>
+            <li><a href="orders.php">VIEW ORDERS</a></li>
         </ul>
         <div class="btns">
             <a href="items.php" class="order-now-btn">ORDER NOW</a>
@@ -91,6 +92,7 @@ $result = $stmt->get_result();
             <p>DATE</p>
             <p>PRICE</p>
             <p>STATUS</p>
+            <p>ACTION</p>
         </div>
         <?php
         if (mysqli_num_rows($result) > 0) {
@@ -100,15 +102,15 @@ $result = $stmt->get_result();
                     <p><?= $order['orderDate'] ?></p>
                     <p>RM <?= $order['totalAmount'] ?></p>
                     <p><?= $order['status'] ?></p>
+                    <a href="order_details.php?orderID=<?= $order['orderID'] ?>">
+                        View Details
+                    </a>
                 </div>
         <?php
             }
-        } else if ($status === 'complete') {
-            echo "<div class='cart-empty'><p>Your Order is not yet COMPLETE or you do NOT have any Orders</p></div>";
-            exit();
         } else {
-            /* If no Order with specific status */
-            echo "<div class='cart-empty'><p>You do not order yet</p></div>";
+            /* If no Order */
+            echo "<div class='cart-empty'><p>You Do not Order yet</p></div>";
         }
         ?>
     </main>
