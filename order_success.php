@@ -25,7 +25,7 @@
     <?php echo htmlspecialchars($orderID); ?>
 </p>
 
-<a href="index.php">Continue Shopping</a>
+<a href="orders.php">View Order</a>
 
 </body>
 </html>
