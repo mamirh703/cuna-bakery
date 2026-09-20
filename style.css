@@ -221,6 +221,7 @@ nav {
     border: 2px solid black;
     border-radius: 150px;
     corner-shape: scoop squircle square square;
+    position: relative;
 }
 
 .item-card-img {
