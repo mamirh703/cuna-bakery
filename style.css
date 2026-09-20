@@ -214,28 +214,24 @@ nav {
 
 .item-card {
     justify-items: center;
-    align-items: center;
     background-color: #FFF7EA;
-    padding: 2rem 1rem;
+    padding: 1rem;
     padding-top: unset;
     border: 2px solid black;
     border-radius: 150px;
     corner-shape: scoop squircle square square;
     position: relative;
-}
-
-.item-card-img {
-    height: 200px;
-}
-
-.item-card-img img {
-    width: 100%;
     height: 100%;
 }
 
+.item-card-img img {
+    width: 240px;
+    height: 180px;
+    object-fit: cover;
+}
+
 .item-card-details {
-    justify-items: center;
-    align-items: center;
+    text-align: center;
     line-height: 30px;
     padding: 1rem;
 }
