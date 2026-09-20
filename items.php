@@ -2,9 +2,13 @@
 include "connect.php";
 session_start();
 
-$result = $conn->query("SELECT * FROM products ORDER BY productID");
-$classes = ['c1', 'c2', 'c3','c4'];
-$i = 0;
+// if logged in and user is admin, redirect to admin page
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && $_SESSION['role'] === 'admin') {
+    header("Location: admin.php");
+    exit;
+}
+
+$result = $conn->query("SELECT * FROM products WHERE is_active = 1 ORDER BY productID");
 ?>
 
 <!DOCTYPE html>
@@ -57,8 +61,8 @@ $i = 0;
                     <p>RM <?php echo htmlspecialchars($row['price']) ?></p>
                 </div>
                 <div class="item-card-button">
-                    <button class="item-details <?= $row['productID'] ?>" popovertarget="pd <?= $row['productID'] ?>">DETAILS</button>
-                    <dialog id="pd <?= $row['productID'] ?>" popover>
+                    <button class="item-details <?= $row['productID'] ?>" popovertarget="pd<?= $row['productID'] ?>">DETAILS</button>
+                    <dialog id="pd<?= $row['productID'] ?>" popover>
                         <img src="<?= htmlspecialchars($row['image'])?>">
                         <p><?= htmlspecialchars($row['description']) ?></p>
                     </dialog>

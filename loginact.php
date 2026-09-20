@@ -43,6 +43,6 @@
         else {
             echo "Invalid username or password";
         }
+        mysqli_stmt_close($stmt);
     }
-    mysqli_stmt_close($stmt);
 ?>         

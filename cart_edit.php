@@ -27,7 +27,7 @@ if ($productID <= 0) {
 }
 
 // Fetch this specific cart item
-$stmt = $conn->prepare("SELECT cart.quantity, products.name, products.price 
+$stmt = $conn->prepare("SELECT cart.quantity, products.name, products.price, products.image 
                         FROM cart
                         INNER JOIN products ON cart.productID = products.productID
                         WHERE cart.userID = ? AND cart.productID = ?");
@@ -111,7 +111,7 @@ if (isset($_POST['delete_item'])) {
             <div class="cart-container">
                 <div class="cart-items">
                     <div class="first-childe">
-                        <img src="uploads/u good.jpg" alt="">
+                        <img src="<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
                         <p><?= htmlspecialchars($product['name']) ?></p>
                     </div>
                     <p>Current Quantity: <?= $product['quantity'] ?></p>

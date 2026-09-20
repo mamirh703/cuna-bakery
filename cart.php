@@ -48,7 +48,7 @@ if (isset($_POST['add_to_cart'])) {
     header("Location: cart.php");
     exit();
 }
-$stmt = $conn->prepare("SELECT cart.productID, cart.quantity, products.name, products.price 
+$stmt = $conn->prepare("SELECT cart.productID, cart.quantity, products.name, products.price, products.image 
                                 FROM cart
                                 INNER JOIN products
                                     ON cart.productID = products.productID
@@ -108,13 +108,12 @@ $total = 0;
                 if (mysqli_num_rows($result) > 0) {
                     while ($product  = $result->fetch_assoc()) {
                         $subtotal = $product['price'] * $product['quantity'];
-
                         $total += $subtotal; ?>
                         <!-- Cart Items -->
                         <div class="cart-items">
                             <div class="first-childe">
                                 <input type="radio" name="productID" value="<?= $product['productID'] ?>">
-                                <img src="uploads/u good.jpg">
+                                <img src="<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
                                 <p><?= htmlspecialchars($product['name']); ?></p>
                             </div>
                             <p>QTY: x<?= $product['quantity']; ?> </p>

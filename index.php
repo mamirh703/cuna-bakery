@@ -2,7 +2,7 @@
 include "connect.php";
 session_start();
 
-$result = $conn->query("SELECT * FROM products ORDER BY productID LIMIT 3");
+$result = $conn->query("SELECT * FROM products WHERE is_active = 1 ORDER BY productID LIMIT 3");
 $classes = ['c1', 'c2', 'c3'];
 $i = 0;
 ?>
@@ -77,8 +77,8 @@ $i = 0;
                                 <p>RM <?php echo htmlspecialchars($row['price']) ?></p>
                             </div>
                             <div class="item-card-button">
-                                <button class="item-details <?= $classes[$i] ?>" popovertarget="pd <?= $classes[$i] ?>">DETAILS</button>
-                                <dialog id="pd <?= $classes[$i] ?>" popover>
+                                <button class="item-details <?= $classes[$i] ?>" popovertarget="pd<?= $classes[$i] ?>">DETAILS</button>
+                                <dialog id="pd<?= $classes[$i] ?>" popover>
                                     <img src="<?= htmlspecialchars($row['image']) ?>">
                                     <p><?= htmlspecialchars($row['description']) ?></p>
                                 </dialog>
