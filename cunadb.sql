@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 19, 2026 at 10:30 AM
+-- Generation Time: Sep 20, 2026 at 12:08 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -34,15 +34,6 @@ CREATE TABLE `cart` (
   `quantity` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`cartID`, `userID`, `productID`, `quantity`) VALUES
-(1, 3, 1, 2),
-(2, 3, 2, 1),
-(3, 3, 3, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -56,13 +47,6 @@ CREATE TABLE `orders` (
   `totalAmount` decimal(10,2) NOT NULL,
   `status` varchar(30) DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`orderID`, `userID`, `orderDate`, `totalAmount`, `status`) VALUES
-(1, 2, '2026-09-19 16:22:23', 13.00, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -78,14 +62,6 @@ CREATE TABLE `order_items` (
   `price` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `order_items`
---
-
-INSERT INTO `order_items` (`orderItemID`, `orderID`, `productID`, `quantity`, `price`) VALUES
-(1, 1, 1, 1, 6.00),
-(2, 1, 2, 1, 7.00);
-
 -- --------------------------------------------------------
 
 --
@@ -97,17 +73,9 @@ CREATE TABLE `products` (
   `name` varchar(100) NOT NULL,
   `description` text DEFAULT NULL,
   `price` decimal(10,2) NOT NULL,
-  `image` varchar(555) NOT NULL
+  `image` varchar(555) NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`productID`, `name`, `description`, `price`, `image`) VALUES
-(1, 'Makanan 1', 'Makanan 1 sangat manis', 6.00, ''),
-(2, 'Makanan 2', 'Makanan 2 sangat masam', 7.00, ''),
-(3, 'Makanan 3', 'Makanan 3 sangat pahit', 5.00, '');
 
 -- --------------------------------------------------------
 
@@ -131,7 +99,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`userID`, `username`, `password`, `address`, `phone`, `role`) VALUES
 (1, 'Admin', '$2y$10$I/0eX.1xZt4tRtr2mUF.MuvskI9UNZU92myUrDUIBgRmG9txxIoXa', '123, Anywhere, Fake Street', '0123456789', 'admin'),
 (2, 'Daniel', '$2y$10$RFmQornS86gIOflSMra9/eT6RR8Axfp6u0vh0zXCa3WA2V/dUaoQ2', '246, Fake Street, Anywhere', '0544288796', 'member'),
-(3, 'Amir', '$2y$10$fMgWgg0kiCFbROzNsUIHMeI1P8IcBQ8A2LHLeu6jEC2RYxloQ3Zw6', '23, Kunci Air,Fake', '0122564875', 'member');
+(3, 'Amir', '$2y$10$fMgWgg0kiCFbROzNsUIHMeI1P8IcBQ8A2LHLeu6jEC2RYxloQ3Zw6', '23, Kunci Air,Fake', '0122564875', 'member'),
+(4, 'Muadri', '$2y$10$m.OB5TDVPJAkgnBRf1pI.eSlbLXyzwUpwJBmQnHCZGgFkm27NNiHO', '57, mana tah, pt', '0192542526', 'member');
 
 --
 -- Indexes for dumped tables
@@ -181,31 +150,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cartID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `cartID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `orderItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `orderItemID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
