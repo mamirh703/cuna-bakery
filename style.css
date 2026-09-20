@@ -202,7 +202,7 @@ nav {
 }
 
 /* ### index.php | items.php | admin.php ### */
-/* Grid box for popular item */
+/* Grid box for item */
 .item-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, min(370px, 95%));
@@ -213,15 +213,17 @@ nav {
 }
 
 .item-card {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
     justify-items: center;
     background-color: #FFF7EA;
     padding: 1rem;
-    padding-top: unset;
+    padding-top: 0;
     border: 2px solid black;
     border-radius: 150px;
     corner-shape: scoop squircle square square;
     position: relative;
-    height: 100%;
+    height: 425px;
 }
 
 .item-card-img img {
@@ -239,8 +241,7 @@ nav {
 .item-card-button {
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 1rem 2rem;
+    margin-bottom: 1rem;
     gap: 2px;
 }
 
@@ -307,7 +308,7 @@ nav {
 }
 
 .add-item a {
-    height: 424.2px;
+    height: 420.2px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -486,11 +487,6 @@ textarea:focus {
     font-weight: 600;
 }
 
-/* 
-################
-### cart.php ###
-################
-*/
 .cart-container {
     border: 1px solid black;
     border-radius: 20px;
@@ -515,7 +511,9 @@ textarea:focus {
 }
 
 .cart-items img {
-    height: 80px;
+    height: 90px;
+    width: 120px;
+    object-fit: cover;
 }
 
 .cart-items p {
@@ -631,6 +629,7 @@ textarea:focus {
 
 .order-meta {
     margin-right: auto;
+    align-self: center;
 }
 
 .value {
