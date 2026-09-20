@@ -56,8 +56,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-item'])) {
                     <p class="currency">RM</p>
                     <input type="number" name="price" id="price" class="price-input" step="0.10" min="0" required value="<?= htmlspecialchars($price ?? '') ?>">
                 </div>
-                <label>Image</label>
-                <input type="file" class="form-control" name="image" accept="image/*"> 
+                <br>
+                <label for="image">Image</label>
+                <input type="file" class="form-control" name="image" id="image" accept="image/*"> 
             </div>
             <div class="down-btns">
                 <a href="admin.php" class="cont-btn">← Back to Items List</a>
