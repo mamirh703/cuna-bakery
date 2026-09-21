@@ -29,7 +29,7 @@ $i = 0;
         <ul class="links">
             <li><a href="admin.php">HOME</a></li>
             <li><a href="admin_add.php">ITEMS</a></li>
-            <li><a href="orders.php">VIEW ORDERS</a></li>
+            <li><a href="admin_orders.php">VIEW ORDERS</a></li>
         </ul>
         <div class="btns">
             <a href="items.php" class="order-now-btn">ORDER NOW</a>
