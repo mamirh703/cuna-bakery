@@ -36,10 +36,10 @@ $i = 0;
             <a href="cart.php" class="cart-btn"><span class="material-symbols-outlined">shopping_cart</span></a>
             <?php
             if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
-                echo "<a href='login.php' class='order-now-btn'>Login</a>";
+                echo "<a href='login.php' class='order-now-btn'>LOGIN</a>";
             }
             else {
-                echo '<a href="logout.php" class="order-now-btn">Logout</a>';
+                echo '<a href="logout.php" class="order-now-btn">LOGOUT</a>';
                 }
             ?>
         </div>

@@ -1,8 +1,10 @@
 <?php
 include "connect.php";
-include "session_check.php";
+session_start();
 
-$result = $conn->query("SELECT * FROM products WHERE is_active = 1 ORDER BY productID");
+$result = $conn->query("SELECT * FROM products WHERE is_active = 1 ORDER BY productID LIMIT 3");
+$classes = ['c1', 'c2', 'c3'];
+$i = 0;
 ?>
 
 <!DOCTYPE html>
@@ -23,61 +25,82 @@ $result = $conn->query("SELECT * FROM products WHERE is_active = 1 ORDER BY prod
 <body>
     <!-- Navbar -->
     <nav>
-        <div class="logo"><a href="index.php">CUNA'S BAKERY</a></div>
+        <div class="logo"><a href="admin.php">CUNA'S BAKERY</a></div>
         <ul class="links">
-            <li><a href="index.php">HOME</a></li>
-            <li><a href="items.php">ITEMS</a></li>
-            <li><a href="admin_orders.php">VIEW ORDERS</a></li>
+            <li><a href="admin.php">HOME</a></li>
+            <li><a href="admin_add.php">ITEMS</a></li>
+            <li><a href="orders.php">VIEW ORDERS</a></li>
         </ul>
         <div class="btns">
             <a href="items.php" class="order-now-btn">ORDER NOW</a>
             <a href="cart.php" class="cart-btn"><span class="material-symbols-outlined">shopping_cart</span></a>
+            <?php
+            if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
+                echo "<a href='login.php' class='order-now-btn'>LOGIN</a>";
+            }
+            else {
+                echo '<a href="logout.php" class="order-now-btn">LOGOUT</a>';
+                }
+            ?>
         </div>
     </nav>
+    <!-- Main Content -->
     <main>
-        <!-- Item Display -->
-        <div class="item-grid">
-            <?php while ($row = $result->fetch_assoc()) { ?>
-                <!-- Parent -->
-                <div class="item-card">
-                    <!-- childe -->
-                    <div class="item-card-img">
-                        <!-- delete button relative to image -->
-                        <a href="del_item.php?productID=<?= $row['productID'] ?>" onclick="return confirm('Are you sure you want to delete this item?');">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black" style="position: absolute; top: 30; right: 30px;">
-                                <path d="M280-440h400v-80H280v80ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
-                            </svg></a>
-                        <!-- gambar -->
-                        <img src="<?= htmlspecialchars($row['image']) ?>">
-                    </div>
-                    <div class="item-card-details">
-                        <h3><?php echo htmlspecialchars($row['name']) ?></h3>
-                        <p><?php echo htmlspecialchars($row['description']) ?></p>
-                        <p>RM <?php echo htmlspecialchars($row['price']) ?></p>
-                    </div>
-                    <div class="item-card-button">
-                        <button class="item-details <?= $row['productID'] ?>" popovertarget="pd<?= $row['productID'] ?>">DETAILS</button>
-                        <dialog id="pd<?= $row['productID'] ?>" popover>
-                            <img src="uploads/u good.jpg">
-                            <p><?= htmlspecialchars($row['description']) ?></p>
-                        </dialog>
-                        <form method="POST" action="cart.php" style="display:inline;">
-                            <input type="hidden" name="productID" value="<?= $row['productID'] ?>">
-                            <button class="item-cart" type="submit" name="add_to_cart">
-                                <span class="material-symbols-outlined">shopping_cart</span>
-                            </button>
-                        </form>
+        <div class="about">
+            <!-- Background shape -->
+            <div class="shape1">
+                <h1>CUNA'S BAKERY</h1>
+                <div class="para">
+                    <p>
+                        Lorem ipsum dolor sit amet et delectus accommodare his consul copiosae legendos at vix ad putent delectus delimgata usu. Vidit dissentiet eos cu eum
+                    </p><br>
+                    <div class="btns">
+                        <a href="items.php" class="order-btn">ORDER NOW</a>
                     </div>
                 </div>
-            <?php
-            } ?>
-            <!-- Add Item Card -->
-            <div class="add-item">
-                <a href="add_item.php">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 -960 960 960" width="100px">
-                        <path d="M440-280h80v-160h160v-80H520v-160h-80v160H280v80h160v160Zm40 200q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
-                    </svg>
-                </a>
+            </div>
+            <div class="img">
+                <div class="img-cont">
+                    <img src="uploads/DSC_0103.JPG">
+                </div>
+            </div>
+        </div>
+        <!-- Popular section -->
+        <div class="popular">
+            <!-- background shape 2 -->
+            <div class="shape2">
+                <h1>POPULAR ITEMS</h1>
+                <!-- Parent -->
+                <div class="item-grid">
+                    <?php while ($row = $result->fetch_assoc()) { ?>
+                        <!-- Child -->
+                        <div class="item-card">
+                            <div class="item-card-img">
+                                <img src="<?= htmlspecialchars($row['image']) ?>">
+                            </div>
+                            <div class="item-card-details">
+                                <h3><?php echo htmlspecialchars($row['name']) ?></h3>
+                                <p><?php echo htmlspecialchars($row['description']) ?></p>
+                                <p>RM <?php echo htmlspecialchars($row['price']) ?></p>
+                            </div>
+                            <div class="item-card-button">
+                                <button class="item-details <?= $classes[$i] ?>" popovertarget="pd<?= $classes[$i] ?>">DETAILS</button>
+                                <dialog id="pd<?= $classes[$i] ?>" popover>
+                                    <img src="<?= htmlspecialchars($row['image']) ?>">
+                                    <p><?= htmlspecialchars($row['description']) ?></p>
+                                </dialog>
+                                <form method="POST" action="cart.php" style="display:inline;">
+                                    <input type="hidden" name="productID" value="<?= $row['productID'] ?>">
+                                    <button  class="item-cart" type="submit" name="add_to_cart">
+                                    <span class="material-symbols-outlined">shopping_cart</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    <?php $i++;
+                    } ?>
+                </div>
+                <h6><a href="items.php">VIEW ALL</a></h6>
             </div>
         </div>
     </main>
