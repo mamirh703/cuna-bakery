@@ -56,7 +56,7 @@ $orders = $stmt->get_result();
         <div class="logo"><a href="admin.php">CUNA'S BAKERY</a></div>
         <ul class="links">
             <li><a href="admin.php">HOME</a></li>
-            <li><a href="items.php">ITEMS</a></li>
+            <li><a href="admin_add.php">ITEMS</a></li>
             <li><a href="admin_orders.php">VIEW ORDERS</a></li>
             <li><a href="mng_user.php">USERS</a></li>
         </ul>
