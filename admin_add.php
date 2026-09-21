@@ -12,7 +12,7 @@ $result = $conn->query("SELECT * FROM products WHERE is_active = 1 ORDER BY prod
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CUNA'S BAKERY</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=shopping_cart" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
@@ -63,7 +63,7 @@ $result = $conn->query("SELECT * FROM products WHERE is_active = 1 ORDER BY prod
                             <p><?= htmlspecialchars($row['description']) ?></p>
                         </dialog>
                         <?php
-                        echo "<a href='edit_item.php?table=products&id=".$row["productID"]."'><button class='edit'>Edit</button></a>"
+                        echo "<a href='edit_item.php?table=products&id=".$row["productID"]."'><button class='edit'><span class='material-symbols-outlined'>edit</span></button></a>"
                         ?>
                     </div>
                 </div>
