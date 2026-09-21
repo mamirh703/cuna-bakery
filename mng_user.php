@@ -57,6 +57,7 @@ $result = $conn->query("SELECT * FROM users ORDER BY userID");
                     <th>ADDRESS</th>
                     <th>PHONE NUMBER</th>
                     <th>ROLE</th>
+                    <th>ACTION</th>
                 </tr>
             </thead>
                 <?php while ($row = $result->fetch_assoc()) {?>
@@ -68,8 +69,8 @@ $result = $conn->query("SELECT * FROM users ORDER BY userID");
                             <td><?= htmlspecialchars($row['phone']) ?></td>
                             <td><?= htmlspecialchars($row['role']) ?></td>
                             <td>
-                                <a href="admin_order_details.php?orderID=<?= urlencode($row['userID'])?>">
-                                    View / Update
+                                <a href="change_role.php?userID=<?= urlencode($row['userID']) ?>">
+                                    Change Role
                                 </a>
                             </td>
                         </tr>
