@@ -76,35 +76,42 @@ $orders = $stmt->get_result();
             <li><a href="admin_orders.php?status=Complete">COMPLETE</a></li>
         </ul>
     </div>
-    <div class="table">
-        <p>ORDER ID</p>
-        <p>CUSTOMER</p>
-        <p>DATE</p>
-        <p>TOTAL (RM)</p>
-        <p>STATUS</p>
-        <p>ACTION</p>
+    <div class="table-wrapper">
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th>ORDER ID</th>
+                    <th>CUSTOMER</th>
+                    <th>DATE</th>
+                    <th>TOTAL (RM)</th>
+                    <th>STATUS</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <?php if ($orders->num_rows === 0): ?>
+                <div class="cart-empty">
+                    <p>No orders found</p>
+                </div>
+            <?php else: ?>
+                <?php while ($o = $orders->fetch_assoc()): ?>
+                    <tbody>
+                        <tr>
+                            <td>#<?= htmlspecialchars($o['orderID']) ?></td>
+                            <td><?= htmlspecialchars($o['username']) ?></td>
+                            <td><?= htmlspecialchars($o['orderDate']) ?></td>
+                            <td><?= number_format($o['totalAmount'], 2) ?></td>
+                            <td><?= htmlspecialchars($o['status']) ?></td>
+                            <td>
+                                <a href="admin_order_details.php?orderID=<?= urlencode($o['orderID']) ?>">
+                                    View / Update
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                <?php endwhile; ?>
+            <?php endif; ?>
+        </table>
     </div>
-    <?php if ($orders->num_rows === 0): ?>
-        <div class="cart-empty">
-            <p>No orders found</p>
-        </div>
-    <?php else: ?>
-        <?php while ($o = $orders->fetch_assoc()): ?>
-            <div class="order-items">
-                <p>#<?= htmlspecialchars($o['orderID']) ?></p>
-                <p><?= htmlspecialchars($o['username']) ?></p>
-                <p><?= htmlspecialchars($o['orderDate']) ?></p>
-                <p><?= number_format($o['totalAmount'], 2) ?></p>
-                <p><?= htmlspecialchars($o['status']) ?></p>
-                <p>
-                    <a href="admin_order_details.php?orderID=<?= urlencode($o['orderID']) ?>">
-                        View / Update
-                    </a>
-                </p>
-            </div>
-        <?php endwhile; ?>
-    <?php endif; ?>
-    </table>
 </body>
 
 </html>

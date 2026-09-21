@@ -112,26 +112,35 @@ $items = $stmt->get_result();
         </div>
         <h2>Items</h2>
     </div>
-    <div class="table">
-        <p>Item</p>
-        <p>Price</p>
-        <p>Qty</p>
-        <p>Subtotal</p>
+    <div class="table-wrapper">
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <?php if ($items->num_rows === 0): ?>
+                <div class="cart-empty">
+                    <p>No items found</p>
+                </div>
+            <?php else: ?>
+                <?php while ($item = $items->fetch_assoc()): ?>
+                    <tbody>
+                        <tr>
+                            <td><?= htmlspecialchars($item['name']) ?></td>
+                            <td>RM <?= number_format($item['price'], 2) ?></td>
+                            <td>x<?= htmlspecialchars($item['quantity']) ?></td>
+                            <td>RM <?= number_format($item['subtotal'], 2) ?></td>
+                        </tr>
+                    </tbody>
+                <?php endwhile; ?>
+            <?php endif; ?>
+
+        </table>
     </div>
-    <?php if ($items->num_rows === 0): ?>
-        <div class="cart-empty">
-            <p>No items found</p>
-        </div>
-    <?php else: ?>
-        <?php while ($item = $items->fetch_assoc()): ?>
-            <div class="order-items">
-                <p><?= htmlspecialchars($item['name']) ?></p>
-                <p>RM <?= number_format($item['price'], 2) ?></p>
-                <p>x<?= htmlspecialchars($item['quantity']) ?></p>
-                <p>RM <?= number_format($item['subtotal'], 2) ?></p>
-            </div>
-        <?php endwhile; ?>
-    <?php endif; ?>
     <div class="order-total">
         <h3>TOTAL : RM <?= number_format($order['totalAmount'], 2) ?></h3>
     </div>

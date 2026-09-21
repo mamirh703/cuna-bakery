@@ -573,34 +573,37 @@ textarea:focus {
 }
 
 /* 
-#################
-### order.php ###
-#################
+#################################################
+### order.php | admin_order/order_details.php ###
+#################################################
 */
+/* | order_details.php | */
 .order {
     margin-left: 5%;
 }
 
-.table {
+.table-wrapper {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    border: 1px solid black;
-    border-radius: 10px;
     margin: 1rem 5%;
-    padding: 5px 1%;
 }
 
-.order-items {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.items-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0.75rem;
+}
 
-    border: 1px solid black;
-    border-radius: 10px;
-    margin: 1rem 5%;
-    padding: 5px 1%;
+.items-table thead,
+.items-table tbody {
+    outline: 2px solid black;
+    border-radius: 16px;
+}
+
+/* Remove the default cell borders */
+.items-table th,
+.items-table td {
+    padding: 1rem 0;
+    text-align: center;
 }
 
 /* 

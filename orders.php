@@ -87,32 +87,42 @@ $result = $stmt->get_result();
                 <li><a href="orders.php?status=complete">Complete</a></li>
             </ul>
         </div>
-        <div class="table">
-            <p>#ID</p>
-            <p>DATE</p>
-            <p>PRICE</p>
-            <p>STATUS</p>
-            <p>ACTION</p>
+        <div class="table-wrapper">
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th>#ID</th>
+                        <th>DATE</th>
+                        <th>PRICE</th>
+                        <th>STATUS</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <?php
+                if (mysqli_num_rows($result) > 0) {
+                    while ($order = $result->fetch_assoc()) { ?>
+                        <tbody>
+                            <tr>
+                                <th>#<?= htmlspecialchars($order['orderID']) ?></th>
+                                <th><?= $order['orderDate'] ?></th>
+                                <th>RM <?= $order['totalAmount'] ?></th>
+                                <th><?= $order['status'] ?></th>
+                                <th>
+                                    <a href="order_details.php?orderID=<?= $order['orderID'] ?>">
+                                        View Details
+                                    </a>
+                                </th>
+                            </tr>
+                        </tbody>
+                <?php
+                    }
+                } else {
+                    /* If no Order */
+                    echo "<div class='cart-empty'><p>You Do not Order yet</p></div>";
+                }
+                ?>
+            </table>
         </div>
-        <?php
-        if (mysqli_num_rows($result) > 0) {
-            while ($order = $result->fetch_assoc()) { ?>
-                <div class="order-items">
-                    <p>#<?= htmlspecialchars($order['orderID']) ?></p>
-                    <p><?= $order['orderDate'] ?></p>
-                    <p>RM <?= $order['totalAmount'] ?></p>
-                    <p><?= $order['status'] ?></p>
-                    <a href="order_details.php?orderID=<?= $order['orderID'] ?>">
-                        View Details
-                    </a>
-                </div>
-        <?php
-            }
-        } else {
-            /* If no Order */
-            echo "<div class='cart-empty'><p>You Do not Order yet</p></div>";
-        }
-        ?>
     </main>
 </body>
 
