@@ -58,6 +58,7 @@ $orders = $stmt->get_result();
             <li><a href="admin.php">HOME</a></li>
             <li><a href="items.php">ITEMS</a></li>
             <li><a href="admin_orders.php">VIEW ORDERS</a></li>
+            <li><a href="mng_user.php">USERS</a></li>
         </ul>
         <div class="btns">
             <a href="items.php" class="order-now-btn">ORDER NOW</a>
