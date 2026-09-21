@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-item'])) {
                 <label for="price">Price</label>
                 <div class="price-bar">
                     <p class="currency">RM</p>
-                    <input type="number" name="price" id="price" class="price-input" step="0.10" min="0" required value="<?= htmlspecialchars($price ?? '') ?>">
+                    <input type="number" name="price" id="price" class="price-input" step="0.01" min="0" required value="<?= htmlspecialchars($price ?? '') ?>">
                 </div>
                 <br>
                 <label for="image">Image</label>

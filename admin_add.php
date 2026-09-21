@@ -62,12 +62,9 @@ $result = $conn->query("SELECT * FROM products WHERE is_active = 1 ORDER BY prod
                             <img src="<?= htmlspecialchars($row['image'])?>">
                             <p><?= htmlspecialchars($row['description']) ?></p>
                         </dialog>
-                        <form method="POST" action="cart.php" style="display:inline;">
-                            <input type="hidden" name="productID" value="<?= $row['productID'] ?>">
-                            <button class="item-cart" type="submit" name="add_to_cart">
-                                <span class="material-symbols-outlined">shopping_cart</span>
-                            </button>
-                        </form>
+                        <?php
+                        echo "<a href='edit_item.php?table=products&id=".$row["productID"]."'><button class='edit'>Edit</button></a>"
+                        ?>
                     </div>
                 </div>
             <?php
