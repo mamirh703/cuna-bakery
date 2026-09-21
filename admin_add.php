@@ -59,7 +59,7 @@ $result = $conn->query("SELECT * FROM products WHERE is_active = 1 ORDER BY prod
                     <div class="item-card-button">
                         <button class="item-details <?= $row['productID'] ?>" popovertarget="pd<?= $row['productID'] ?>">DETAILS</button>
                         <dialog id="pd<?= $row['productID'] ?>" popover>
-                            <img src="uploads/u good.jpg">
+                            <img src="<?= htmlspecialchars($row['image'])?>">
                             <p><?= htmlspecialchars($row['description']) ?></p>
                         </dialog>
                         <form method="POST" action="cart.php" style="display:inline;">
