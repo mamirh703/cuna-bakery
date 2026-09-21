@@ -61,7 +61,7 @@ $i = 0;
             </div>
             <div class="img">
                 <div class="img-cont">
-                    <img src="uploads/DSC_0103.JPG">
+                    <img src="uploads/dubai-chewy-cookies-5460.jpg">
                 </div>
             </div>
         </div>
