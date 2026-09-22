@@ -49,7 +49,7 @@ $row = $result->fetch_assoc();
                 <br>
                 <!-- show current image -->
                 <label for="current_image">Current Image</label>
-                <img src="<?= htmlspecialchars($row['image']) ?>" alt="Current Image" style="max-width: 200px; max-height: 200px;">
+                <img src="<?= htmlspecialchars($row['image']) ?>" alt="Current Image" style="width: 240px; height: 180px; object-fit: cover;">
                 <br>
                 <label for="price">Price</label>
                 <div class="price-bar">
