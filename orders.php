@@ -82,9 +82,9 @@ $result = $stmt->get_result();
         <!-- order links -->
         <div class="order">
             <ul class="links">
-                <li><a href="orders.php?status=all">All Order</a></li>
-                <li><a href="orders.php?status=pending">Pending</a></li>
-                <li><a href="orders.php?status=complete">Complete</a></li>
+                <li><a href="orders.php?status=all">ALL ORDERS</a></li>|
+                <li><a href="orders.php?status=pending">PENDING</a></li>|
+                <li><a href="orders.php?status=complete">COMPLETE</a></li>
             </ul>
         </div>
         <div class="table-wrapper">

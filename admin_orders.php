@@ -67,12 +67,12 @@ $orders = $stmt->get_result();
     </nav>
     <!-- Title -->
     <div class="header">
-        <h1>ADMIN — ALL ORDERS</h1>
+        <h1>ADMIN — VIEW ORDERS</h1>
     </div>
     <!-- order links -->
     <div class="order">
         <ul class="links">
-            <li><a href="admin_orders.php?status=all">All ORDER</a></li>|
+            <li><a href="admin_orders.php?status=all">ALL ORDERS</a></li>|
             <li><a href="admin_orders.php?status=Pending">PENDING</a></li>|
             <li><a href="admin_orders.php?status=Complete">COMPLETE</a></li>
         </ul>
