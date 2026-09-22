@@ -35,13 +35,17 @@
 
             } 
             else {
-                echo "Invalid username or password";
+                echo "<script>alert('Invalid username or password.');
+                        window.location='login.php';
+                        </script>";
             }
 
         } 
 
         else {
-            echo "Invalid username or password";
+            echo "<script>alert('Invalid username or password.');
+                    window.location='login.php';
+                    </script>";
         }
         mysqli_stmt_close($stmt);
     }

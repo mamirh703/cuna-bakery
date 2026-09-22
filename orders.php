@@ -118,7 +118,7 @@ $result = $stmt->get_result();
                     }
                 } else {
                     /* If no Order */
-                    echo "<div class='cart-empty'><p>You Do not Order yet</p></div>";
+                    echo "<tbody><tr class='cart-empty'><td colspan=6;>NO Orders Found</td></tr></tbody>";
                 }
                 ?>
             </table>

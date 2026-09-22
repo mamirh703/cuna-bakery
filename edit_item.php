@@ -2,10 +2,9 @@
 include "connect.php";
 include "session_check.php";
 
-$table = $_GET["table"];
-$id = $_GET["id"];
+$id = $_GET["productID"] ?? null;
 
-$sql = "SELECT * FROM $table WHERE productID = $id";
+$sql = "SELECT * FROM products WHERE productID = $id";
 $result = $conn->query($sql);
 
 $row = $result->fetch_assoc();
@@ -35,100 +34,39 @@ $row = $result->fetch_assoc();
 
 <body>
 
-<div class="header">
-    <h1>Edit Item</h1>
-</div>
-
-<div class="container">
-    <div class="form-group">
-
-        <form action="edit_item_act.php" method="POST" enctype="multipart/form-data">
-
-            <!-- Important: pass the ID -->
-            <input type="hidden" name="id"
-                value="<?php echo htmlspecialchars($id); ?>">
-
-            <!-- Pass table -->
-            <input type="hidden" name="table"
-                value="<?php echo htmlspecialchars($table); ?>">
-
-            <?php
-
-            $imageColumns = ["image"];
-
-            foreach ($row as $column => $value) {
-
-                if (in_array($column, $imageColumns)) {
-
-                    echo "
-                    <label>$column</label>
-
-                    <!-- Keep the existing image filename -->
-                    <input type='hidden'
-                        name='old_$column'
-                        value='" . htmlspecialchars($value) . "'>
-
-                    <!-- Show existing image -->
-                    <br>
-                    <img src='uploads/" . htmlspecialchars($value) . "'
-                        width='150'
-                        alt='Current image'>
-
-                    <br><br>
-
-                    <!-- User can choose a new image -->
-                    <input type='file'
-                        class='form-control'
-                        name='$column'
-                        accept='image/*'>
-
-                    <br>";
-
-                } else {
-
-                    // Don't allow productID to be changed
-                    if ($column == "productID") {
-
-                        echo "
-                        <input type='hidden'
-                            name='$column'
-                            value='" . htmlspecialchars($value) . "'>";
-
-                    } elseif ($column == "price") {
-                        echo "
-                        <label>$column</label>
-
-                        <input type='number'
-                            name='$column'
-                            step='0.01'
-                            min='0'
-                            value='" . htmlspecialchars($value) . "'>";
-
-                    } else {
-
-                        echo "
-                        <label>$column</label>
-
-                        <input type='text'
-                            class='form-control'
-                            name='$column'
-                            value='" . htmlspecialchars($value) . "'
-                            required>
-
-                        <br>";
-                    }
-                }
-            }
-            ?>
-
-            <input type="submit" value="UPDATE" name="update">
-
-        </form>
-
-        <br>
-
+    <div class="header">
+        <h1>Edit Item</h1>
     </div>
-</div>
+    <div class="form-container">
+        <form action="edit_item_act.php" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="productID" value="<?= htmlspecialchars($row['productID']) ?>">
+            <div class="add-form">
+                <label for="name">Item Name</label>
+                <input type="text" name="name" required value="<?= htmlspecialchars($row['name']) ?>">
+                <br>
+                <label for="description">Description</label>
+                <textarea name="description" id="description" required><?= htmlspecialchars($row['description']) ?></textarea>
+                <br>
+                <!-- show current image -->
+                <label for="current_image">Current Image</label>
+                <img src="<?= htmlspecialchars($row['image']) ?>" alt="Current Image" style="max-width: 200px; max-height: 200px;">
+                <br>
+                <label for="price">Price</label>
+                <div class="price-bar">
+                    <p class="currency">RM</p>
+                    <input type="number" name="price" id="price" class="price-input" step="0.01" min="0" required value="<?= htmlspecialchars($row['price']) ?>">
+                </div>
+                <br>
+                <label for="image">Image</label>
+                <input type="file" class="form-control" name="image" id="image" accept="image/*">
+            </div>
+            <div class="down-btns">
+                <a href="admin_add.php" class="cont-btn">CANCEL</a>
+                <button type="submit" name="update" class="checkout-btn">UPDATE</button>
+            </div>
+        </form>
+    </div>
 
 </body>
+
 </html>

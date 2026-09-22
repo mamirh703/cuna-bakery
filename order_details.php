@@ -142,9 +142,11 @@ $items = $stmt->get_result();
                     <?php endwhile; ?>
 
                 <?php else: ?>
-                    <div class="cart-empty">
-                        <p>This order has no items.</p>
-                    </div>
+                    <tbody>
+                        <tr class="cart-empty">
+                            <td colspan="4">No items Found.</td>
+                        </tr>
+                    </tbody>
                 <?php endif; ?>
             </table>
         </div>

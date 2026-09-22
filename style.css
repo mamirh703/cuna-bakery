@@ -286,13 +286,20 @@ nav {
 [popover] {
     position: fixed;
     inset: 0;
+    text-align: center;
+    width: 372px;
     margin: auto;
-    width: min(320px, 90vw);
     border: none;
     border-radius: 16px;
     padding: 20px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, .2);
     transition: all 0.3s ease;
+}
+
+[popover] img {
+    width: 332px;
+    height: 249px;
+    object-fit: cover;
 }
 
 [popover]::backdrop {

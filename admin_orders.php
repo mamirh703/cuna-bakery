@@ -90,9 +90,11 @@ $orders = $stmt->get_result();
                 </tr>
             </thead>
             <?php if ($orders->num_rows === 0): ?>
-                <div class="cart-empty">
-                    <p>No orders found</p>
-                </div>
+                <tbody>
+                    <tr class="cart-empty">
+                        <td colspan="6">NO Orders Found</td>
+                    </tr>
+                </tbody>
             <?php else: ?>
                 <?php while ($o = $orders->fetch_assoc()): ?>
                     <tbody>
