@@ -62,9 +62,9 @@ $result = $conn->query("SELECT * FROM products WHERE is_active = 1 ORDER BY prod
                             <img src="<?= htmlspecialchars($row['image']) ?>">
                             <p><?= htmlspecialchars($row['description']) ?></p>
                         </dialog>
-                        <?php
-                        echo "<a href='edit_item.php?table=products&id=".$row["productID"]."'><button class='edit'><span class='material-symbols-outlined'>edit</span></button></a>"
-                        ?>
+                        <a href="edit_item.php?productID=<?= $row['productID'] ?>">
+                            <button class='edit' style="height: 35.5px; width: 35.5px;"><span class='material-symbols-outlined'>edit</span></button>
+                        </a>
                     </div>
                 </div>
             <?php

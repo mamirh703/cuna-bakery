@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-item'])) {
                 <input type="file" class="form-control" name="image" id="image" accept="image/*"> 
             </div>
             <div class="down-btns">
-                <a href="admin.php" class="cont-btn">← Back to Items List</a>
+                <a href="admin_add.php" class="cont-btn">← Back to Items List</a>
                 <button type="submit" name="add-item" class="checkout-btn">ADD ITEM</button>
             </div>
         </form>

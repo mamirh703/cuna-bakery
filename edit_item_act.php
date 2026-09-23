@@ -1,154 +1,45 @@
-```php
 <?php
+include 'connect.php';
+include 'session_check.php';
 
-include "connect.php";
-include "session_check.php";
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
+    $productID = $_POST['productID'];
+    $name = $_POST['name'];
+    $description = $_POST['description'];
+    $price = $_POST['price'];
 
-if (isset($_POST["update"])) {
+    // Handle image upload
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $imageTmpPath = $_FILES['image']['tmp_name'];
+        $imageName = basename($_FILES['image']['name']);
+        $uploadDir = 'uploads/';
+        $uploadFilePath = $uploadDir . $imageName;
 
-    $table = $_POST["table"];
-    $id = $_POST["id"];
-
-    // Get the old image
-    $oldImage = $_POST["old_image"];
-
-    // Store all fields that need to be updated
-    $updates = [];
-
-    foreach ($_POST as $column => $value) {
-
-        // Don't update these fields
-        if (
-            $column == "update" ||
-            $column == "table" ||
-            $column == "id" ||
-            $column == "old_image"
-        ) {
-            continue;
-        }
-
-        // Don't update productID
-        if ($column == "productID") {
-            continue;
-        }
-
-        $updates[$column] = $value;
-    }
-
-    /*
-     * IMAGE
-     */
-
-    if (!empty($_FILES["image"]["name"])) {
-
-        // New image was selected
-        $imageName = $_FILES["image"]["name"];
-        $tmpName = $_FILES["image"]["tmp_name"];
-
-        // Generate a unique filename
-        $extension = pathinfo($imageName, PATHINFO_EXTENSION);
-        $newImageName = uniqid() . "." . $extension;
-
-        // Upload location
-        $uploadPath = "uploads/" . $newImageName;
-
-        if (move_uploaded_file($tmpName, $uploadPath)) {
-
-            // Add new image to update
-            $updates["image"] = $newImageName;
-
-            // Delete old image
-            if (
-                !empty($oldImage) &&
-                file_exists("uploads/" . $oldImage)
-            ) {
-                unlink("uploads/" . $oldImage);
-            }
-
+        // Move the uploaded file to the desired directory
+        if (move_uploaded_file($imageTmpPath, $uploadFilePath)) {
+            // Update the product with the new image path
+            $stmt = $conn->prepare("UPDATE products SET name=?, description=?, price=?, image=? WHERE productID=?");
+            $stmt->bind_param("ssdsi", $name, $description, $price, $uploadFilePath, $productID);
         } else {
-
-            // Upload failed → keep old image
-            $updates["image"] = $oldImage;
+            echo "<script>alert('Error uploading image.');
+                    window.location='edit_item.php?productID=$productID';
+                    </script>";
+            exit();
         }
-
     } else {
-
-        // No new image → KEEP OLD IMAGE
-        $updates["image"] = $oldImage;
+        // Update the product without changing the image
+        $sql = "UPDATE products SET name=?, description=?, price=? WHERE productID=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssdi", $name, $description, $price, $productID);
     }
-
-
-    /*
-     * BUILD UPDATE QUERY
-     */
-
-    $setParts = [];
-
-    foreach ($updates as $column => $value) {
-
-        $setParts[] = "`$column` = ?";
-    }
-
-    $sql = "UPDATE `$table`
-            SET " . implode(", ", $setParts) . "
-            WHERE productID = ?";
-
-
-    /*
-     * PREPARED STATEMENT
-     */
-
-    $stmt = $conn->prepare($sql);
-
-    if (!$stmt) {
-        die("SQL Error: " . $conn->error);
-    }
-
-
-    /*
-     * BIND VALUES
-     */
-
-    $types = "";
-    $values = [];
-
-    foreach ($updates as $value) {
-
-        $types .= "s";
-        $values[] = $value;
-    }
-
-    // productID
-    $types .= "i";
-    $values[] = $id;
-
-
-    $stmt->bind_param(
-        $types,
-        ...$values
-    );
-
-
-    /*
-     * EXECUTE
-     */
 
     if ($stmt->execute()) {
-
-        echo "<script>
-                alert('Item updated successfully!');
-                window.location.href = 'admin_add.php';
-            </script>";
-
+        echo "<script>alert('Item successfully updated.');
+                window.location='admin.php';
+                </script>";
+        exit();
     } else {
-
-        echo "Error updating item: " . $stmt->error;
+        echo "Error updating record: " . $conn->error;
     }
-
-    $stmt->close();
 }
-
-$conn->close();
-
 ?>
-```

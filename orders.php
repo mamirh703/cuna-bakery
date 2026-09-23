@@ -82,9 +82,9 @@ $result = $stmt->get_result();
         <!-- order links -->
         <div class="order">
             <ul class="links">
-                <li><a href="orders.php?status=all">All Order</a></li>
-                <li><a href="orders.php?status=pending">Pending</a></li>
-                <li><a href="orders.php?status=complete">Complete</a></li>
+                <li><a href="orders.php?status=all">ALL ORDERS</a></li>|
+                <li><a href="orders.php?status=pending">PENDING</a></li>|
+                <li><a href="orders.php?status=complete">COMPLETE</a></li>
             </ul>
         </div>
         <div class="table-wrapper">
@@ -118,7 +118,7 @@ $result = $stmt->get_result();
                     }
                 } else {
                     /* If no Order */
-                    echo "<div class='cart-empty'><p>You Do not Order yet</p></div>";
+                    echo "<tbody><tr class='cart-empty'><td colspan=6;>NO Orders Found</td></tr></tbody>";
                 }
                 ?>
             </table>

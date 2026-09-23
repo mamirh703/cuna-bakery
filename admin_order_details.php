@@ -123,9 +123,11 @@ $items = $stmt->get_result();
                 </tr>
             </thead>
             <?php if ($items->num_rows === 0): ?>
-                <div class="cart-empty">
-                    <p>No items found</p>
-                </div>
+                <tbody>
+                    <tr class="cart-empty">
+                        <td colspan="4">No items found</td>
+                    </tr>
+                </tbody>
             <?php else: ?>
                 <?php while ($item = $items->fetch_assoc()): ?>
                     <tbody>
@@ -138,7 +140,6 @@ $items = $stmt->get_result();
                     </tbody>
                 <?php endwhile; ?>
             <?php endif; ?>
-
         </table>
     </div>
     <div class="order-total">

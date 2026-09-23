@@ -16,7 +16,7 @@ if (isset($_POST['update_role'])) {
     $userID = $_POST['userID'] ?? '';
     $newRole = $_POST['role'] ?? '';
 
-    if ($userID !== '' && in_array($newRole, ['admin', 'user'], true)) {
+    if ($userID !== '' && in_array($newRole, ['admin', 'member'], true)) {
         $stmt = $conn->prepare("UPDATE users SET role = ? WHERE userID = ?");
         $stmt->bind_param("si", $newRole, $userID);
         $stmt->execute();
@@ -71,7 +71,7 @@ if (isset($_GET['userID'])) {
                     <p class="value"><?= htmlspecialchars($user['role']) ?></p>
                 </div>
             </div>
-            <h2>Items</h2>
+            <h2>Role</h2>
         </div>
         <div class="order-container">
             <form method="POST" action="change_role.php">
@@ -80,9 +80,9 @@ if (isset($_GET['userID'])) {
                     <div class="order-meta">
                         <input type="hidden" name="userID" value="<?= htmlspecialchars($user['userID']) ?>">
                         <label>
-                            <input type="radio" name="role" value="user"
+                            <input type="radio" name="role" value="member"
                                 <?= $user['role'] === 'member' ? 'checked' : '' ?>>
-                            User
+                            Member
                         </label>
                     </div>
                     <div class="order-meta">

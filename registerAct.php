@@ -41,7 +41,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<script>alert ('Account Created Successfuly');
                             window.location='login.php';</script>";
             } else {
-                echo "Registeration failed.";
+                echo "<script>alert ('Error creating account: " . $conn->error . "');
+                        window.location='register.php';
+                        </script>";
             }
         }
         $stmt->close();
