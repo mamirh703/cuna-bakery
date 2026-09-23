@@ -52,7 +52,7 @@ $i = 0;
                 <h1>CUNA'S BAKERY</h1>
                 <div class="para">
                     <p>
-                        Lorem ipsum dolor sit amet et delectus accommodare his consul copiosae legendos at vix ad putent delectus delimgata usu. Vidit dissentiet eos cu eum
+                        Delicious homemade treats, freshly baked in small batches with quality ingredients and lots of love. We're here to make every small occasions just a little sweeter.
                     </p><br>
                     <div class="btns">
                         <a href="items.php" class="order-btn">ORDER NOW</a>
